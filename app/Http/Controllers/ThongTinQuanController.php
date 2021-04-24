@@ -19,5 +19,8 @@ class ThongTinQuanController extends Controller
         $data = DB::table('loaiquan')->get();
         return view('admin_pages.add_in4_Restaurant')->with('cate_res',$data);
     }
-    
+    public function add_in4(Request $request)
+    {
+        
+    }
 }

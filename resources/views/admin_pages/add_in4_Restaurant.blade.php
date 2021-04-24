@@ -48,6 +48,27 @@
                                         </fieldset>
                                     </div>
                                     <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Vị trí</label>
+                                        <div  class="col-sm-10">
+                                            <div id="map" style="width:100% ; height: 300px"></div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Toạ độ</label>
+                                        <div  class="col-sm-10">
+                                            <input type="text" class="form-control" name="lat_res"
+                                                id="lat_res" placeholder="latitude" required=""  disabled>
+                                                <br>
+                                                <input type="text" class="form-control " name="lng_res"
+                                                id="lng_res" placeholder="longtitude" required="" disabled>
+                                                <br>
+                                                <input type="text" class="form-control" name="address_res"
+                                                id="searchmap" placeholder="Tìm địa chỉ" required="" style="width: 50%">
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="form-group row">
                                         <div class="col-sm-10" style="margin-left:40rem">
                                             <button type="submit" class="btn btn-primary">Add</button>
                                         </div>

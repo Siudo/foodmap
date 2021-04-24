@@ -71,7 +71,7 @@
                                 <li><a href="about.html" class="nav-link">About</a></li>
 
 
-                                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                                <li><a href="blog.html" class="nav-link">Shopacc</a></li>
                                 <li><a href="contact.html" class="nav-link">Contact</a></li>
                                 @if (Session::get('id_user') == null)
                                 <li ><a href="{{URL::to('/login-user')}}" class="btn btn-primary" style="color: white !important;">Đăng nhập</a></li>
@@ -187,7 +187,7 @@
    
     <script src="{{ asset('public/frontend/js/googlemap.js') }}"></script>
     <script
-        src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&callback=initMap&libraries=places"
+        src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&callback=initMap&libraries=&v=weekly"
         async defer></script>
     
     <script src="{{ asset('public/frontend/js/main.js') }}"></script>

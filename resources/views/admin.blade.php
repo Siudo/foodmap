@@ -10,9 +10,11 @@
     <link rel="stylesheet" href="{{ asset('public/backend/assets/css/all.css') }}">
     <link rel="stylesheet" href="{{ asset('public/backend/assets/vendors/chartjs/Chart.min.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('public/backend/assets/vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('public/backend/assets/vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
     <link rel="stylesheet" href="{{ asset('public/backend/assets/css/app.css') }}">
-    <link rel="shortcut icon" href="{{ asset('public/backend/assets/images/logo/logo.png') }}" style="background-color: white" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('public/backend/assets/images/logo/logo.png') }}"
+        style="background-color: white" type="image/x-icon">
 </head>
 
 <body>
@@ -20,8 +22,8 @@
         <div id="sidebar" class='active'>
             <div class="sidebar-wrapper active">
                 <div class="sidebar-header">
-                    <img src="{{ URL::to('public/backend/assets/images/logo/logo.png') }}" style="width:100%; height:150px" alt=""
-                        srcset="">
+                    <img src="{{ URL::to('public/backend/assets/images/logo/logo.png') }}"
+                        style="width:100%; height:150px" alt="" srcset="">
                 </div>
                 <div class="sidebar-menu">
                     <ul class="menu">
@@ -32,13 +34,13 @@
 
 
                         <li class="sidebar-item active ">
-                            <a href="{{URL::to('/dashboard')}}" class='sidebar-link'>
+                            <a href="{{ URL::to('/dashboard') }}" class='sidebar-link'>
                                 <i data-feather="home" width="20"></i>
                                 <span>Dashboard</span>
                             </a>
 
                         </li>
-                      
+
 
 
 
@@ -50,11 +52,11 @@
 
                             <ul class="submenu ">
                                 <li>
-                                    <a href="{{URL::to('/them-thong-tin-quan')}}"> Thêm thông tin quán </a>
+                                    <a href="{{ URL::to('/them-thong-tin-quan') }}"> Thêm thông tin quán </a>
                                 </li>
 
                                 <li>
-                                    <a href="{{URL::to('/tat-ca-quan')}}"> Hiển thị thông tin quán </a>
+                                    <a href="{{ URL::to('/tat-ca-quan') }}"> Hiển thị thông tin quán </a>
                                 </li>
 
                             </ul>
@@ -73,11 +75,11 @@
                             <ul class="submenu ">
 
                                 <li>
-                                    <a href="{{URL::to('/them-loai-quan')}}">Thêm loại</a>
+                                    <a href="{{ URL::to('/them-loai-quan') }}">Thêm loại</a>
                                 </li>
 
                                 <li>
-                                    <a href="{{URL::to('/tat-ca-loai')}}">Tất cả Loại</a>
+                                    <a href="{{ URL::to('/tat-ca-loai') }}">Tất cả Loại</a>
                                 </li>
 
                             </ul>
@@ -93,11 +95,11 @@
                             <ul class="submenu ">
 
                                 <li>
-                                    <a href="{{URL::to('/add-brand-product')}}">Add brands</a>
+                                    <a href="{{ URL::to('/add-brand-product') }}">Add brands</a>
                                 </li>
 
                                 <li>
-                                    <a href="{{URL::to('/all-brand-product')}}">All brand</a>
+                                    <a href="{{ URL::to('/all-brand-product') }}">All brand</a>
                                 </li>
 
                             </ul>
@@ -160,7 +162,9 @@
                                 <a class="dropdown-item active" href="#"><i data-feather="mail"></i> Messages</a>
                                 <a class="dropdown-item" href="#"><i data-feather="settings"></i> Settings</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{URL::to('/logout')}}"><i data-feather="log-out"></i> Logout</a>
+                                <a class="dropdown-item" href="{{ URL::to('/logout') }}"><i
+                                        data-feather="log-out"></i>
+                                    Logout</a>
                             </div>
                         </li>
                         <li class="dropdown">
@@ -176,7 +180,9 @@
                                 <a class="dropdown-item active" href="#"><i data-feather="mail"></i> Messages</a>
                                 <a class="dropdown-item" href="#"><i data-feather="settings"></i> Settings</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{URL::to('/logout')}}"><i data-feather="log-out"></i> Logout</a>
+                                <a class="dropdown-item" href="{{ URL::to('/logout') }}"><i
+                                        data-feather="log-out"></i>
+                                    Logout</a>
                             </div>
                         </li>
                     </ul>
@@ -184,8 +190,8 @@
             </nav>
 
             <div class="main-content container-fluid">
-                
-               @yield('admin_content')
+
+                @yield('admin_content')
             </div>
 
             <footer>
@@ -208,6 +214,14 @@
     <script src="{{ asset('public/backend/assets/vendors/chartjs/Chart.min.js') }}"></script>
     <script src="{{ asset('public/backend/assets/vendors/apexcharts/apexcharts.min.js') }}"></script>
     <script src="{{ asset('public/backend/assets/js/pages/dashboard.js') }}"></script>
+
+
+
+    <script src="{{ asset('public/backend/assets/js/adminmap.js') }}"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&callback=createMap&libraries=places"
+        async defer></script>
+
 
     <script src="{{ asset('public/backend/assets/js/main.js') }}"></script>
 </body>
