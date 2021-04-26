@@ -89,17 +89,17 @@
                         <li class="sidebar-item  has-sub">
                             <a href="#" class='sidebar-link'>
                                 <i data-feather="briefcase" width="20"></i>
-                                <span>Brands</span>
+                                <span>Thông tin Bàn</span>
                             </a>
 
                             <ul class="submenu ">
 
                                 <li>
-                                    <a href="{{ URL::to('/add-brand-product') }}">Add brands</a>
+                                    <a href="{{ URL::to('/them-ban') }}">Thêm Bàn</a>
                                 </li>
 
                                 <li>
-                                    <a href="{{ URL::to('/all-brand-product') }}">All brand</a>
+                                    <a href="{{ URL::to('/thong-tin-ban') }}">Thông tin bàn</a>
                                 </li>
 
                             </ul>

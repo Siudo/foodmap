@@ -12,7 +12,7 @@ function createMap() {
     var inforWindow = new google.maps.InfoWindow();
     marker.setVisible(false);
     var searchBox = document.getElementById("searchmap");
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(searchBox);
+    map.controls[google.maps.ControlPosition.TOP_CENTER].push(searchBox);
     var autocomplete = new google.maps.places.Autocomplete(searchBox);
     autocomplete.bindTo('bounds', map);
 

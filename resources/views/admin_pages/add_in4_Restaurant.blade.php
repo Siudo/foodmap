@@ -11,7 +11,7 @@
                         <div class="card-body">
 
                             <div class="form-body">
-                                <form action="{{ URL::to('/save-brand-product') }}" method="post">
+                                <form action="{{ URL::to('/save-in4') }}" method="post">
                                     {{ csrf_field() }}
                                     <div class="form-group row">
                                         <label for="inputEmail3" class="col-sm-2 col-form-label">Tên quán</label>
@@ -23,7 +23,7 @@
                                     <div class="form-group row">
                                         <label for="inputEmail3" class="col-sm-2 col-form-label">Trạng thái</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="brand_product_name"
+                                            <input type="text" class="form-control" name="status_res"
                                                 id="inputEmail3" placeholder="Đóng || Mở cửa" required="">
                                         </div>
                                     </div>
@@ -38,7 +38,7 @@
                                         <label for="inputEmail3" class="col-sm-2 col-form-label">Loại quán</label>
                                         <fieldset class="col-sm-10">
                                             
-                                            <select class="form-select" id="basicSelect">
+                                            <select class="form-select" id="basicSelect" name="cate_res">
                                                 @foreach ($cate_res as $key => $cate_res)
                                                 <option value="{{$cate_res->id_loai}}">{{$cate_res->tenloai}}</option>
                                                 @endforeach
@@ -55,13 +55,13 @@
                                         
                                     </div>
                                     <div class="form-group row">
-                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Toạ độ</label>
+                                       
                                         <div  class="col-sm-10">
-                                            <input type="text" class="form-control" name="lat_res"
-                                                id="lat_res" placeholder="latitude" required=""  disabled>
+                                            <input type="hidden" class="form-control" name="lat_res"
+                                                id="lat_res" placeholder="latitude" required=""  >
                                                 <br>
-                                                <input type="text" class="form-control " name="lng_res"
-                                                id="lng_res" placeholder="longtitude" required="" disabled>
+                                                <input type="hidden" class="form-control " name="lng_res"
+                                                id="lng_res" placeholder="longtitude" required="" >
                                                 <br>
                                                 <input type="text" class="form-control" name="address_res"
                                                 id="searchmap" placeholder="Tìm địa chỉ" required="" style="width: 50%">
