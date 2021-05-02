@@ -51,7 +51,6 @@ Route::get('/them-thong-tin-quan', [ThongTinQuanController::class , 'index_add_i
 Route::post('/save-in4', [ThongTinQuanController::class , 'add_in4']);
 Route::get('/tat-ca-quan', [ThongTinQuanController::class , 'index_all_in4']);
 Route::get('/edit-in4-res/{id_quan}', [ThongTinQuanController::class , 'edit_in4']);
-
 Route::post('/update-in4-res/{id_quan}/{id_vitri}', [ThongTinQuanController::class , 'update_in4']);
 
 

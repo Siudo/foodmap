@@ -8,7 +8,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;700;900&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{asset('public/frontend/fonts/icomoon/style.css')}}">
+    <link rel="stylesheet" href="{{ asset('public/frontend/fonts/icomoon/style.css') }}">
 
     <link rel="stylesheet" href="{{ asset('public/frontend/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('public/frontend/css/jquery-ui.css') }}">
@@ -35,7 +35,7 @@
     <div id="overlayer"></div>
     <div class="loader">
         <div class="text-primary" data-aos="flip-up" role="status">
-            <img src="{{asset('public/frontend/images/Logo/logofood.png')}}" alt="">
+            <img src="{{ asset('public/frontend/images/Logo/logofood.png') }}" alt="">
         </div>
     </div>
 
@@ -55,36 +55,40 @@
         <header class="site-navbar light js-sticky-header site-navbar-target" role="banner">
 
             <div class="container">
-                <div class="row align-items-center" >
+                <div class="row align-items-center">
 
-                    <div class="col-6 col-xl-2" >
-                        <div class="mb-0 site-logo" ><a href="{{URL::to('/')}}" class="mb-0"><img src="{{asset('public/frontend/images/Logo/logofood.png')}}" style="width:100%" alt=""></a></div>
+                    <div class="col-6 col-xl-2">
+                        <div class="mb-0 site-logo"><a href="{{ URL::to('/') }}" class="mb-0"><img
+                                    src="{{ asset('public/frontend/images/Logo/logofood.png') }}" style="width:100%"
+                                    alt=""></a></div>
                     </div>
 
                     <div class="col-12 col-md-10 d-none d-xl-block">
                         <nav class="site-navigation position-relative text-right" role="navigation">
 
                             <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-                                <li class="active"><a href="{{URL::to('/')}}" class="nav-link">Trang chủ</a></li>
-                                
-                                <li><a href="{{URL::to('/gmap')}}" class="nav-link">Bản đồ</a></li>
+                                <li class="active"><a href="{{ URL::to('/') }}" class="nav-link">Trang chủ</a></li>
+
+                                <li><a href="{{ URL::to('/gmap') }}" class="nav-link">Bản đồ</a></li>
                                 <li><a href="about.html" class="nav-link">About</a></li>
 
 
                                 <li><a href="blog.html" class="nav-link">Shopacc</a></li>
                                 <li><a href="contact.html" class="nav-link">Contact</a></li>
                                 @if (Session::get('id_user') == null)
-                                <li ><a href="{{URL::to('/login-user')}}" class="btn btn-primary" style="color: white !important;">Đăng nhập</a></li>
+                                    <li><a href="{{ URL::to('/login-user') }}" class="btn btn-primary"
+                                            style="color: white !important;">Đăng nhập</a></li>
                                 @else
-                                <li class="has-children"><a href="#" class="btn btn-primary" style="color: white !important;">{{Session::get('tentk')}}</a>
-                                    <ul class="dropdown">
-                                        <li><a href="#" class="nav-link">Thông tin</a></li>
-                                        <li><a href="{{URL::to('/logout')}}" class="nav-link">Đăng xuất</a></li>
-                                        
-                                      </ul>
-                                </li>
+                                    <li class="has-children"><a href="#" class="btn btn-primary"
+                                            style="color: white !important;">{{ Session::get('tentk') }}</a>
+                                        <ul class="dropdown">
+                                            <li><a href="#" class="nav-link">Thông tin</a></li>
+                                            <li><a href="{{ URL::to('/logout') }}" class="nav-link">Đăng xuất</a></li>
+
+                                        </ul>
+                                    </li>
                                 @endif
-                                
+
                             </ul>
                         </nav>
                     </div>
@@ -184,12 +188,61 @@
     <script src="{{ asset('public/frontend/js/jquery.fancybox.min.js') }}"></script>
     <script src="{{ asset('public/frontend/js/jquery.sticky.js') }}"></script>
     <script src="{{ asset('public/frontend/js/isotope.pkgd.min.js') }}"></script>
-   
-    <script src="{{ asset('public/frontend/js/googlemap.js') }}"></script>
+    {{-- <script>
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById("map"), {
+                center: {
+                    lat: 10.843371,
+                    lng: 106.795153
+                },
+                zoom: 13,
+            });
+
+            var infoWindow = new google.maps.InfoWindow();
+
+            // current location
+            var locate;
+            map.controls[google.maps.ControlPosition.TOP_CENTER].push(locate);
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const pos = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude,
+                        };
+                        infoWindow.setPosition(pos);
+                        var marker = new google.maps.Marker({
+                            map: map,
+                            position: pos,
+                        });
+                        infoWindow.setContent("lat and lng : " + pos.lat + "------" + pos.lng);
+                        infoWindow.open(map);
+                        map.setCenter(pos);
+                    },
+                    () => {
+                        handleLocationError(true, infoWindow, map.getCenter());
+                    }
+                );
+            } else {
+                handleLocationError(false, infoWindow, map.getCenter());
+            }
+
+
+        }
+
+        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+            infoWindow.setPosition(pos);
+            infoWindow.setContent(browserHasGeolocation ? "Lỗi : Lỗi Geolocation" :
+                "Lỗi : Trình duyệt không hỗ trợ Geolocation.");
+            infoWindow.open(map);
+        }
+
+    </script> --}}
+    {{-- <script src="{{ asset('public/frontend/js/googlemap.js') }}"></script> --}}
     <script
         src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&callback=initMap&libraries=&v=weekly"
         async defer></script>
-    
+
     <script src="{{ asset('public/frontend/js/main.js') }}"></script>
 
 
