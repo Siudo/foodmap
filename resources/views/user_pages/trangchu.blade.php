@@ -1,412 +1,603 @@
 @extends('welcome')
 @section('content')
-    
-<div class="hero-v1">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6 mr-auto text-center text-lg-left" data-aos="fade-right"  data-aos-delay="1400">
-                
-                <h1 class="heading mb-3">Food Map</h1>
-                <span class="d-block subheading">Chỉ dẫn đến thiên đường ăn uống</span>
-                <p class="mb-5">Bạn có thể tìm kiếm các quán ăn gần bạn ngay lúc này . Chúng tôi sẽ chỉ dẫn bạn đến những quán ăn đỉnh cao !</p>
-                <p class="mb-4"><a href="{{URL::to('/gmap')}}" class="btn btn-primary">Tìm quán ăn</a></p>
-
-
-
-            </div>
-            <div class="col-lg-6" data-aos="fade-left"   data-aos-delay="1700">
-                <figure class="illustration" style="margin-top: -240px">
-                    <img src="{{asset('public/frontend/images/banner/banner1.png')}}" alt="Image"  class="img-fluid">
-                </figure>
-            </div>
-            <div class="col-lg-6"></div>
-        </div>
-    </div>
-</div>
-
-
-<!-- MAIN -->
-
-<div class="site-section stats">
-    <div class="container">
-        <div class="row mb-3">
-            <div class="col-lg-7 text-center mx-auto">
-                <h2 class="section-heading">Quán ăn nổi tiếng</h2>
-                <p>Những quán ăn được đánh giá cao trong khu vực TP.Thủ Đức</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4" >
-                <div class="data" data-aos="fade-right" data-aos-delay="1200" >
-                    <span class="icon text-primary">
-                        <img src="{{asset('public/frontend/images/flaticon/svg/restaurant.svg')}}" style="width : 30%" alt="">
-                    </span>
-
-                    <strong class="d-block number">523</strong>
-                    <span class="label">Các quán đã đăng ký</span>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="data" data-aos="fade-up"  data-aos-delay="1200">
-                    <span class="icon text-primary">
-                        <img src="{{asset('public/frontend/images/flaticon/svg/serving-dish.svg')}}" style="width : 30%" alt="">
-                    </span>
-                    <strong class="d-block number">4.5</strong>
-                    <span class="label">Chất lượng phục vụ</span>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="data" data-aos="fade-left"  data-aos-delay="1200">
-                    <span class="icon text-primary">
-                        <img src="{{asset('public/frontend/images/flaticon/svg/customer-review.svg')}}" style="width : 30%" alt="">
-                    </span>
-                    <strong class="d-block number">3,124</strong>
-                    <span class="label">Khách hàng sử dụng Food map</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="site-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 mb-4 mb-lg-0">
-                <figure class="img-play-vid" data-aos="fade-left" >
-                    <img src="{{asset('public/frontend/images/banner/banner1.png')}}" alt="Image" class="img-fluid">
-                    <div class="absolute-block d-flex">
-                        <span class="text">Watch the Video</span>
-                        <a href="https://www.youtube.com/watch?v=9pVy8sRC440" data-fancybox class="btn-play">
-                            <span class="icon-play"></span>
-                        </a>
-                    </div>
-                </figure>
-            </div>
-            <div class="col-lg-5 ml-auto">
-                <h2 class="mb-4 section-heading">What is Coronavirus?</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex officia quas, modi sit eligendi
-                    numquam!</p>
-                <ul class="list-check list-unstyled mb-5">
-                    <li>Lorem ipsum dolor sit amet</li>
-                    <li>Consectetur adipisicing elit</li>
-                    <li>Unde doloremque</li>
-                </ul>
-                <p><a href="#" class="btn btn-primary">Learn more</a></p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="container pb-5">
-    <div class="row" >
-        <div class="col-lg-3" >
-            <div class="feature-v1 d-flex align-items-center">
-                <div class="icon-wrap mr-3">
-                    <span class="flaticon-protection"></span>
-                </div>
-                <div>
-                    <h3>Protection</h3>
-                    <span class="d-block">Lorem ipsum dolor sit.</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="feature-v1 d-flex align-items-center">
-                <div class="icon-wrap mr-3">
-                    <span class="flaticon-patient"></span>
-                </div>
-                <div>
-                    <h3>Prevention</h3>
-                    <span class="d-block">Lorem ipsum dolor sit.</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="feature-v1 d-flex align-items-center">
-                <div class="icon-wrap mr-3">
-                    <span class="flaticon-hand-sanitizer"></span>
-                </div>
-                <div>
-                    <h3>Treatments</h3>
-                    <span class="d-block">Lorem ipsum dolor sit.</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="feature-v1 d-flex align-items-center">
-                <div class="icon-wrap mr-3">
-                    <span class="flaticon-virus"></span>
-                </div>
-                <div>
-                    <h3>Symptoms</h3>
-                    <span class="d-block">Lorem ipsum dolor sit.</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="site-section bg-primary-light">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6">
-
-                <div class="row">
-                    <div class="col-6 col-lg-6 mt-lg-5">
-                        <div class="media-v1 bg-1">
-                            <div class="icon-wrap">
-                                <span class="flaticon-stay-at-home"></span>
-                            </div>
-                            <div class="body">
-                                <h3>Stay at home</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, debitis!</p>
-                            </div>
-                        </div>
-
-                        <div class="media-v1 bg-1">
-                            <div class="icon-wrap">
-                                <span class="flaticon-patient"></span>
-                            </div>
-                            <div class="body">
-                                <h3>Wear facemask</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, debitis!</p>
+      <!--? slider Area Start-->
+      <div class="slider-area ">
+        <div class="slider-active">
+            <!-- Single Slider -->
+            <div class="single-slider slider-height d-flex align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-9 col-lg-9 col-md-9">
+                            <div class="hero__caption">
+                                <span data-animation="fadeInLeft" data-delay=".2s">Bạn chưa biết những chỗ ăn ngon ?</span>
+                                <h1 data-animation="fadeInLeft" data-delay=".4s">Yêu là phải nói, đói là phải ăn </h1>
+                                <p data-animation="fadeInLeft" data-delay=".6s">Hãy để chúng tôi dẫn bạn đến những địa điểm quán ăn ngon . Chúc bạn tìm được quán ăn lý tưởng cho bữa ăn của bạn !</p>
+                                <!-- Hero-btn -->
+                                <div class="hero__btn">
+                                    <a href="{{URL::to('/gmap')}}" class="btn hero-btn"  data-animation="fadeInLeft" data-delay=".8s">Tìm Quán Ăn</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-6 col-lg-6">
-                        <div class="media-v1 bg-1">
-                            <div class="icon-wrap">
-                                <span class="flaticon-social-distancing"></span>
-                            </div>
-                            <div class="body">
-                                <h3>Keep social distancing</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, debitis!</p>
-                            </div>
-                        </div>
-
-                        <div class="media-v1 bg-1">
-                            <div class="icon-wrap">
-                                <span class="flaticon-hand-washing"></span>
-                            </div>
-                            <div class="body">
-                                <h3>Wash your hands</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, debitis!</p>
+                </div>
+            </div>
+            <!-- Single Slider -->
+            <div class="single-slider slider-height d-flex align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-9 col-lg-9 col-md-9">
+                            <div class="hero__caption">
+                                <span data-animation="fadeInLeft" data-delay=".2s">Bạn chưa biết những chỗ ăn ngon ?</span>
+                                <h1 data-animation="fadeInLeft" data-delay=".4s">Yêu là phải nói, đói là phải ăn</h1>
+                                <p data-animation="fadeInLeft" data-delay=".6s">Hãy để chúng tôi dẫn bạn đến những địa điểm quán ăn ngon . Chúc bạn tìm được quán ăn lý tưởng cho bữa ăn của bạn !</p>
+                                <!-- Hero-btn -->
+                                <div class="hero__btn">
+                                    <a href="{{URL::to('/gmap')}}" class="btn hero-btn"  data-animation="fadeInLeft" data-delay=".8s">Tìm Quán Ăn</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
-            </div>
-            <div class="col-lg-5 ml-auto">
-                <h2 class="section-heading mb-4">How to Prevent Coronavirus?</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque corporis doloribus
-                    consequatur fugit voluptatum ex rerum perspiciatis cupiditate, esse hic!</p>
-                <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas, error!</p>
-
-                <ul class="list-check list-unstyled mb-5">
-                    <li>Lorem ipsum dolor sit amet</li>
-                    <li>Consectetur adipisicing elit</li>
-                    <li>Unde doloremque</li>
-                </ul>
-
-                <p><a href="#" class="btn btn-primary">Read more about prevention</a></p>
             </div>
         </div>
     </div>
-</div>
-
-<div class="site-section">
-    <div class="container">
-        <div class="row mb-5">
-            <div class="col-lg-7 mx-auto text-center">
-                <span class="subheading">What you need to do</span>
-                <h2 class="mb-4 section-heading">How To Protect Yourself</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex officia quas, modi sit eligendi
-                    numquam!</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6 ">
-                <div class="row mt-5 pt-5">
-                    <div class="col-lg-6 do ">
-                        <h3>You should do</h3>
-                        <ul class="list-unstyled check">
-                            <li>Stay at home</li>
-                            <li>Wear mask</li>
-                            <li>Use Sanitizer</li>
-                            <li>Disinfect your home</li>
-                            <li>Wash your hands</li>
-                            <li>Frequent self-isolation</li>
-                        </ul>
+    <!-- slider Area End-->
+    <!--? About Area Start -->
+    <div class="about-low-area section-padding30">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-12">
+                    <div class="about-caption mb-50">
+                        <!-- Section Tittle -->
+                        <div class="section-tittle mb-35">
+                            <span>Discover Your Test</span>
+                            <h2>We Provide Good Food For Your Family!</h2>
+                        </div>
+                        <p>Ut enim acgsd minim veniam, quxcis nostrud exercitation ullamco laboris nisi ufsit aliquip ex ea commodo consequat is aute irure m, quis nostrud exer.</p>
                     </div>
-                    <div class="col-lg-6 dont ">
-                        <h3>You should avoid</h3>
-                        <ul class="list-unstyled cross">
-                            <li>Avoid infected people</li>
-                            <li>Avoid animals</li>
-                            <li>Avoid handshaking</li>
-                            <li>Aviod infected surfaces</li>
-                            <li>Don't touch your face</li>
-                            <li>Avoid droplets</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <img src="images/protect.png" alt="Image" class="img-fluid">
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="site-section bg-primary-light">
-    <div class="container">
-        <div class="row mb-5">
-            <div class="col-lg-7 mx-auto text-center">
-                <h2 class="mb-4 section-heading">Symptoms of Coronavirus</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex officia quas, modi sit eligendi
-                    numquam!</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6 mb-4">
-                <div class="symptom d-flex">
-                    <div class="img">
-                        <img src="images/symptom_high-fever.png" alt="Image" class="img-fluid">
-                    </div>
-                    <div class="text">
-                        <h3>High Fever</h3>
-                        <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum ipsum repellendus
-                            animi modi iure provident, cupiditate perferendis voluptatem!</p>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
+                            <div class="single-caption mb-20">
+                                <div class="caption-icon">
+                                    <span class="flaticon-restaurant"></span>
+                                </div>
+                                <div class="caption">
+                                    <p>Ut enim ad minim veniam, quis nostrud exer.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
+                            <div class="single-caption mb-20">
+                                <div class="caption-icon">
+                                    <span class="flaticon-tools-and-utensils-1"></span>
+                                </div>
+                                <div class="caption">
+                                    <p>Ut enim ad minim veniam, quis nostrud exer.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
+                            <div class="single-caption mb-20">
+                                <div class="caption-icon">
+                                    <span class="flaticon-hat"></span>
+                                </div>
+                                <div class="caption">
+                                    <p>Ut enim ad minim veniam, quis nostrud exer.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
+                            <div class="single-caption mb-20">
+                                <div class="caption-icon">
+                                    <span class="flaticon-restaurant"></span>
+                                </div>
+                                <div class="caption">
+                                    <p>Ut enim ad minim veniam, quis nostrud exer.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <div class="symptom d-flex">
-                    <div class="img">
-                        <img src="images/symptom_cough.png" alt="Image" class="img-fluid">
-                    </div>
-                    <div class="text">
-                        <h3>Cough</h3>
-                        <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla ullam illo laborum
-                            repellendus vel esse dolor, sunt exercitationem.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <div class="symptom d-flex">
-                    <div class="img">
-                        <img src="images/symptom_sore-troath.png" alt="Image" class="img-fluid">
-                    </div>
-                    <div class="text">
-                        <h3>Sore Troath</h3>
-                        <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum esse voluptatum, vel
-                            inventore at! Ullam, libero reiciendis amet?</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-6 mb-4">
-                <div class="symptom d-flex">
-                    <div class="img">
-                        <img src="images/symptom_headache.png" alt="Image" class="img-fluid">
-                    </div>
-                    <div class="text">
-                        <h3>Headache</h3>
-                        <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus autem voluptatem
-                            ratione veniam rerum qui quibusdam reprehenderit quis.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row justify-content-md-center">
-            <div class="col-lg-10">
-                <div class="note row">
-
-                    <div class="col-lg-8 mb-4 mb-lg-0"><strong>Stay at home and call your doctor:</strong> Lorem
-                        ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, eaque.</div>
-                    <div class="col-lg-4 text-lg-right">
-                        <a href="#" class="btn btn-primary"><span class="icon-phone mr-2 mt-3"></span>Help
-                            line</a>
+                <div class="col-lg-6 col-md-12">
+                    <!-- about-img -->
+                    <div class="about-img ">
+                        <img src="{{asset('public/frontend/assets/img/gallery/about.png')}}" alt="">
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-
-<div class="site-section">
-    <div class="container">
-        <div class="row mb-5">
-            <div class="col-lg-7 mx-auto text-center">
-                <h2 class="mb-4 section-heading">News &amp; Articles</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex officia quas, modi sit eligendi
-                    numquam!</p>
+    <!-- About Area End -->
+    <!--? gallery Products Start -->
+    <section class="gallery-area fix ">
+        <!-- Gallery Top Start -->
+        <div class="gallery-top section-bg pt-90 pb-40" data-background="{{asset('assets/img/gallery/section_bg01.png')}}">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="cl-xl-7 col-lg-8 col-md-10">
+                        <!-- Section Tittle -->
+                        <div class="section-tittle text-center mb-70">
+                            <span>Our Offerd Menu</span>
+                            <h2>Some Trendy And  Popular Courses Offerd</h2>
+                        </div> 
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="properties__button">
+                        <!--Nav Button  -->
+                        <nav>                                                                         
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Special</a>
+                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"> Lunch</a>
+                                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false"> Brakefirst </a>
+                                <a class="nav-item nav-link" id="nav-dinner-tab" data-toggle="tab" href="#nav-dinner" role="tab" aria-controls="nav-dinner" aria-selected="false"> Dinner </a>
+                            </div>
+                        </nav>
+                        <!--End Nav Button  -->
+                    </div>
+                </div>
             </div>
         </div>
+        <!-- Gallery Top End -->
+        <!-- Gallery Bottom Start -->
+        <div class="container-fluid p-0">
+            <!-- Nav Card -->
+            <div class="tab-content" id="nav-tabContent">
+                <!-- card one -->
+                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <div class="row no-gutters">
+                        <div class="col-lg-5 col-md-6 col-sm-6">
+                            <div class="gallery-box">
+                                <div class="single-gallery">
+                                    <div class="gallery-img big-img" style="background-image: url(public/frontend/assets/img/gallery/gallery1.png);"></div>
+                                    <div class="g-caption">
+                                        <span>$25</span>
+                                        <h4>Delicious Food</h4>
+                                        <p>Ut enim ad minim veniam quis nostr.</p>
+                                        <a href="#" class="btn order-btn">Order Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="gallery-box">
+                                <div class="single-gallery">
+                                    <div class="gallery-img big-img" style="background-image: url(public/frontend/assets/img/gallery/gallery2.png);"></div>
+                                    <div class="g-caption">
+                                        <span>$25</span>
+                                        <h4>Delicious Food</h4>
+                                        <p>Ut enim ad minim veniam quis nostr.</p>
+                                        <a href="#" class="btn order-btn">Order Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-12">
+                            <div class="row no-gutters">
+                                <div class="col-lg-12 col-md-6 col-sm-6">
+                                    <div class="gallery-box">
+                                        <div class="single-gallery">
+                                            <div class="gallery-img smoll-img" style="background-image: url(public/frontend/assets/img/gallery/gallery3.png);"></div>
+                                            <div class="g-caption">
+                                                <span>$25</span>
+                                                <h4>Delicious Food</h4>
+                                                <p>Ut enim ad minim veniam quis nostr.</p>
+                                                <a href="#" class="btn order-btn">Order Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-6">
+                                    <div class="gallery-box">
+                                        <div class="single-gallery">
+                                            <div class="gallery-img smoll-img" style="background-image: url(public/frontend/assets/img/gallery/gallery4.png);"></div>
+                                            <div class="g-caption">
+                                                <span>$25</span>
+                                                <h4>Delicious Food</h4>
+                                                <p>Ut enim ad minim veniam quis nostr.</p>
+                                                <a href="#" class="btn order-btn">Order Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card two -->
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <div class="row no-gutters">
+                        <div class="col-lg-5 col-md-6 col-sm-6">
+                            <div class="gallery-box">
+                                <div class="single-gallery">
+                                    <div class="gallery-img big-img" style="background-image: url(public/frontend/assets/img/gallery/gallery2.png);"></div>
+                                    <div class="g-caption">
+                                        <span>$25</span>
+                                        <h4>Delicious Food</h4>
+                                        <p>Ut enim ad minim veniam quis nostr.</p>
+                                        <a href="#" class="btn order-btn">Order Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="gallery-box">
+                                <div class="single-gallery">
+                                    <div class="gallery-img big-img" style="background-image: url(public/frontend/assets/img/gallery/gallery1.png);"></div>
+                                    <div class="g-caption">
+                                        <span>$25</span>
+                                        <h4>Delicious Food</h4>
+                                        <p>Ut enim ad minim veniam quis nostr.</p>
+                                        <a href="#" class="btn order-btn">Order Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-12">
+                            <div class="row no-gutters">
+                                <div class="col-lg-12 col-md-6 col-sm-6">
+                                    <div class="gallery-box">
+                                        <div class="single-gallery">
+                                            <div class="gallery-img smoll-img" style="background-image: url(public/frontend/assets/img/gallery/gallery3.png);"></div>
+                                            <div class="g-caption">
+                                                <span>$25</span>
+                                                <h4>Delicious Food</h4>
+                                                <p>Ut enim ad minim veniam quis nostr.</p>
+                                                <a href="#" class="btn order-btn">Order Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-6">
+                                    <div class="gallery-box">
+                                        <div class="single-gallery">
+                                            <div class="gallery-img smoll-img" style="background-image: url(public/frontend/assets/img/gallery/gallery4.png);"></div>
+                                            <div class="g-caption">
+                                                <span>$25</span>
+                                                <h4>Delicious Food</h4>
+                                                <p>Ut enim ad minim veniam quis nostr.</p>
+                                                <a href="#" class="btn order-btn">Order Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card three -->
+                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                    <div class="row no-gutters">
+                        <div class="col-lg-5 col-md-6 col-sm-6">
+                            <div class="gallery-box">
+                                <div class="single-gallery">
+                                    <div class="gallery-img big-img" style="background-image: url(public/frontend/assets/img/gallery/gallery1.png);"></div>
+                                    <div class="g-caption">
+                                        <span>$25</span>
+                                        <h4>Delicious Food</h4>
+                                        <p>Ut enim ad minim veniam quis nostr.</p>
+                                        <a href="#" class="btn order-btn">Order Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="gallery-box">
+                                <div class="single-gallery">
+                                    <div class="gallery-img big-img" style="background-image: url(public/frontend/assets/img/gallery/gallery2.png);"></div>
+                                    <div class="g-caption">
+                                        <span>$25</span>
+                                        <h4>Delicious Food</h4>
+                                        <p>Ut enim ad minim veniam quis nostr.</p>
+                                        <a href="#" class="btn order-btn">Order Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-12">
+                            <div class="row no-gutters">
+                                <div class="col-lg-12 col-md-6 col-sm-6">
+                                    <div class="gallery-box">
+                                        <div class="single-gallery">
+                                            <div class="gallery-img smoll-img" style="background-image: url(public/frontend/assets/img/gallery/gallery3.png);"></div>
+                                            <div class="g-caption">
+                                                <span>$25</span>
+                                                <h4>Delicious Food</h4>
+                                                <p>Ut enim ad minim veniam quis nostr.</p>
+                                                <a href="#" class="btn order-btn">Order Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-6">
+                                    <div class="gallery-box">
+                                        <div class="single-gallery">
+                                            <div class="gallery-img smoll-img" style="background-image: url(public/frontend/assets/img/gallery/gallery4.png);"></div>
+                                            <div class="g-caption">
+                                                <span>$25</span>
+                                                <h4>Delicious Food</h4>
+                                                <p>Ut enim ad minim veniam quis nostr.</p>
+                                                <a href="#" class="btn order-btn">Order Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card Four -->
+                <div class="tab-pane fade" id="nav-dinner" role="tabpanel" aria-labelledby="nav-dinner">
+                    <div class="row no-gutters">
+                        <div class="col-lg-5 col-md-6 col-sm-6">
+                            <div class="gallery-box">
+                                <div class="single-gallery">
+                                    <div class="gallery-img big-img" style="background-image: url(public/frontend/assets/img/gallery/gallery3.png);"></div>
+                                    <div class="g-caption">
+                                        <span>$25</span>
+                                        <h4>Delicious Food</h4>
+                                        <p>Ut enim ad minim veniam quis nostr.</p>
+                                        <a href="#" class="btn order-btn">Order Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="gallery-box">
+                                <div class="single-gallery">
+                                    <div class="gallery-img big-img" style="background-image: url(public/frontend/assets/img/gallery/gallery4.png);"></div>
+                                    <div class="g-caption">
+                                        <span>$25</span>
+                                        <h4>Delicious Food</h4>
+                                        <p>Ut enim ad minim veniam quis nostr.</p>
+                                        <a href="#" class="btn order-btn">Order Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-12">
+                            <div class="row no-gutters">
+                                <div class="col-lg-12 col-md-6 col-sm-6">
+                                    <div class="gallery-box">
+                                        <div class="single-gallery">
+                                            <div class="gallery-img smoll-img" style="background-image: url(public/frontend/assets/img/gallery/gallery1.png);"></div>
+                                            <div class="g-caption">
+                                                <span>$25</span>
+                                                <h4>Delicious Food</h4>
+                                                <p>Ut enim ad minim veniam quis nostr.</p>
+                                                <a href="#" class="btn order-btn">Order Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-6">
+                                    <div class="gallery-box">
+                                        <div class="single-gallery">
+                                            <div class="gallery-img smoll-img" style="background-image: url(public/frontend/assets/img/gallery/gallery2.png);"></div>
+                                            <div class="g-caption">
+                                                <span>$25</span>
+                                                <h4>Delicious Food</h4>
+                                                <p>Ut enim ad minim veniam quis nostr.</p>
+                                                <a href="#" class="btn order-btn">Order Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Nav Card -->
+        </div>
+        <!-- Gallery Bottom End -->
+    </section>
+    <!-- gallery Products End -->
+    <!--? About-2 Area Start -->
+    <div class="about-area2 section-padding30">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-12">
+                    <!-- about-img -->
+                    <div class="about-img ">
+                        <img src="{{asset('public/frontend/assets/img/gallery/about2.png')}}" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="about-caption mb-50">
+                        <!-- Section Tittle -->
+                        <div class="section-tittle mb-35">
+                            <span>About Our Restaurant</span>
+                            <h2>We Provide Good Food  For Your Family!</h2>
+                        </div>
+                        <p class="pera-top">Ut enim acgsd minim veniam, quxcis nostrud exercitation ullamco laboris nisi ufsit aliquip ex ea commodo consequat is aute irure m, quis nostrud exer</p>
 
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="post-entry">
-                    <a href="#" class="thumb">
-                        <span class="date">30 Jul, 2020</span>
-                        <img src="images/hero_1.jpg" alt="Image" class="img-fluid">
-                    </a>
-                    <div class="post-meta text-center">
-                        <a href="">
-                            <span class="icon-user"></span>
-                            <span>Admin</span>
-                        </a>
-                        <a href="#">
-                            <span class="icon-comment"></span>
-                            <span>3 Comments</span>
-                        </a>
+                        <p  class="mb-65 pera-bottom">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected our, or randomised words which don't look even slightly believab If you are going to use a passage.</p>
+                        <a href="about.html" class="border-btn">Learn More</a>
                     </div>
-                    <h3><a href="#">How Coronavirus Very Contigous</a></h3>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="post-entry">
-                    <a href="#" class="thumb">
-                        <span class="date">30 Jul, 2020</span>
-                        <img src="images/hero_2.jpg" alt="Image" class="img-fluid">
-                    </a>
-                    <div class="post-meta text-center">
-                        <a href="">
-                            <span class="icon-user"></span>
-                            <span>Admin</span>
-                        </a>
-                        <a href="#">
-                            <span class="icon-comment"></span>
-                            <span>3 Comments</span>
-                        </a>
-                    </div>
-                    <h3><a href="#">How Coronavirus Very Contigous</a></h3>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="post-entry">
-                    <a href="#" class="thumb">
-                        <span class="date">30 Jul, 2020</span>
-                        <img src="images/hero_1.jpg" alt="Image" class="img-fluid">
-                    </a>
-                    <div class="post-meta text-center">
-                        <a href="">
-                            <span class="icon-user"></span>
-                            <span>Admin</span>
-                        </a>
-                        <a href="#">
-                            <span class="icon-comment"></span>
-                            <span>3 Comments</span>
-                        </a>
-                    </div>
-                    <h3><a href="#">How Coronavirus Very Contigous</a></h3>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    <!-- About-2 Area End -->
+    <!--? Booking Room Start-->
+    <div class="booking-area section-bg pt-120 pb-130" data-background="public/frontend/assets/img/gallery/section_bg04.png">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="cl-xl-7 col-lg-8 col-md-10">
+                    <!-- Section Tittle -->
+                    <div class="section-tittle text-center mb-40">
+                        <span>About Our Restaurant</span>
+                        <h2>Book A Table</h2>
+                    </div> 
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <form action="#">
+                        <div class="booking-wrap d-flex justify-content-between align-items-center">
+                            <!-- Single Select Box -->
+                            <div class="single-select-box mb-30">
+                                <div class="select-this">
+                                    <div class="select-itms">
+                                        <div class="select-icon">
+                                            <i class="ti-user"></i>
+                                        </div>
+                                        <select name="select" id="select1">
+                                            <option value="">Person</option>
+                                            <option value="">Person 2</option>
+                                            <option value="">Person 3</option>
+                                            <option value="">Person 4</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- select in date -->
+                            <div class="single-select-box mb-30">
+                                <div class="boking-datepicker">
+                                    <input id="datepicker1"  placeholder="Date" />
+                                </div>
+                            </div>
+                            <!-- Single Select Box -->
+                            <div class="single-select-box mb-30">
+                                <div class="boking-datepicker">
+                                    <input id="timepicker"  placeholder="Time" />
+                                </div>
+                            </div>
+                            <!-- Single Select Box -->
+                            <div class="single-select-box mb-30">
+                                <button class="btn select-btn">Book Now</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Booking Room End-->
+    <!--? Our Services Start -->
+    <div class="our-services section-padding30">
+        <div class="container">
+            <div class="row justify-content-sm-center">
+                <div class="cl-xl-7 col-lg-8 col-md-10">
+                    <!-- Section Tittle -->
+                    <div class="section-tittle text-center mb-70">
+                        <span>Servicees We Offer</span>
+                        <h2>Our Best Services</h2>
+                    </div> 
+                </div>
+            </div>
+            <div class="row">
+                <div class=" col-lg-4 col-md-6 col-sm-6">
+                    <div class="single-services text-center mb-30">
+                        <div class="services-ion">
+                            <span class="flaticon-restaurant"></span>
+                        </div>
+                        <div class="services-cap">
+                            <h5><a href="#">Best Chef</a></h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-lg-4 col-md-6 col-sm-6">
+                    <div class="single-services active text-center mb-30">
+                        <div class="services-ion">
+                            <span class="flaticon-tools-and-utensils-1"></span>
+                        </div>
+                        <div class="services-cap">
+                            <h5><a href="#">Quality Food</a></h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-lg-4 col-md-6 col-sm-6">
+                    <div class="single-services text-center mb-30">
+                        <div class="services-ion">
+                            <span class="flaticon-restaurant"></span>
+                        </div>
+                        <div class="services-cap">
+                            <h5><a href="#">Perfect Cook</a></h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Our Services End -->
+    <!--? About-3 Start -->
+    <div class="about-area3 pt-180 pb-170 section-bg" data-background="public/frontend/assets/img/gallery/section_bg03.png">
+        <div class="container">
+            <div class="row justify-content-end">
+                <div class="col-xl-6 col-lg-6 col-md-9 col-sm-11">
+                    <!-- Section Tittle -->
+                    <div class="section-tittle section-tittle2 mb-40">
+                        <span>About Our Restaurant</span>
+                        <h2>We Provide Good Food For Your Family!</h2>
+                        <p>Ut enim acgsd minim veniam, quxcis nostrud exercitation ullamco laboris nisi ufsit aliquip ex ea commodo consequat is aute irure m, quis nostrud exer.</p>
+                    </div> 
+                    <!--Hero form -->
+                    <form action="#" class="search-box">
+                        <div class="input-form">
+                            <input type="text" placeholder="Your Email">
+                        </div>
+                        <div class="search-form">
+                            <button>Subscribe</button>
+                        </div>	
+                    </form>	
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About-3 End -->
+    <!--? Blog Area Start -->
+    <section class="blogs-area section-padding30">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <!-- Section Tittle -->
+                    <div class="section-tittle text-center mb-70">
+                        <span>Our New Blog News</span>
+                        <h2>Our Recnet News</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-blogs mb-100">
+                        <div class="blog-img">
+                            <img src="{{asset('public/frontend/assets/img/gallery/blog1.png')}}" alt="">
+                        </div>
+                        <div class="blog-cap">
+                            <span class="color1">23 Dec, 2020</span>
+                            <h4><a href="blog_details.html">Addiction When Food Plate Becomes</a></h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-blogs mb-100">
+                        <div class="blog-img">
+                            <img src="{{asset('public/frontend/assets/img/gallery/blog2.png')}}" alt="">
+                        </div>
+                        <div class="blog-cap">
+                            <span class="color1">23 Dec, 2020</span>
+                            <h4><a href="blog_details.html">Addiction When Food Plate Becomes</a></h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-blogs mb-100">
+                        <div class="blog-img">
+                            <img src="{{asset('public/frontend/assets/img/gallery/blog3.png')}}" alt="">
+                        </div>
+                        <div class="blog-cap">
+                            <span class="color1">23 Dec, 2020</span>
+                            <h4><a href="blog_details.html">Addiction When Food Plate Becomes</a></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Area End -->
 @endsection

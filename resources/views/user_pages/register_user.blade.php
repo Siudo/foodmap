@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login User</title>
-    <link rel="stylesheet" href="{{ asset('public/frontend/css/all.css') }}">
-    <link rel="stylesheet" href="{{ asset('public/frontend/css/logincss.css') }}">
-    <link rel="shortcut icon" href="{{ asset('public/frontend/images/logo/logofood.png') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ asset('public/frontend/assets/css/all.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/frontend/assets/css/logincss.css') }}">
+    <link rel="shortcut icon" href="{{ asset('public/frontend/assets/img/logo/logofood.png') }}" type="image/x-icon">
 </head>
 
 <body id="particles-js">
@@ -38,8 +38,8 @@
         </div>
       
     </div>
-    <script src="{{ asset('public/frontend/js/all.js') }}"></script>
-    <script src="{{ asset('public/frontend/js/loginjs.js') }}"></script>
+    <script src="{{ asset('public/frontend/assets/js/all.js') }}"></script>
+    <script src="{{ asset('public/frontend/assets/js/loginjs.js') }}"></script>
 </body>
 
 
