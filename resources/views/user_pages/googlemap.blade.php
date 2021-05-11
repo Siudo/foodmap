@@ -48,21 +48,24 @@
 
             var locations = [
                 @foreach ($data_marker as $key => $value)
-                    ["{{ $value->tenquan }}",{{ $value->kinhdo }},{{ $value->vido }}],
+                    ["{{ $value->tenquan }}",{{ $value->kinhdo }},{{ $value->vido }}, "{{$value->diachi}}" , {{$value->id_quan}}],
                 @endforeach
             ];
             var infowindow = new google.maps.InfoWindow();
-
             var marker1, i;
+              
             for (i = 0; i < locations.length; i++) {
                 marker1 = new google.maps.Marker({
                     position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-                    map: map
+                    map: map,
+                    icon: icon_marker,
                 });
-
+               
+            
+                var url_datban = '{{URL::to("/datban/")}}'+'/';
                 google.maps.event.addListener(marker1, 'click', (function(marker1, i) {
                     return function() {
-                        infowindow.setContent(locations[i][0]);
+                        infowindow.setContent( '<strong><b>' +locations[i][0]+'</b></strong> <br>'+'<p style:font-size:20px>' +locations[i][3] +'</p>'+'<a style:"color:blue !important"; href="'+url_datban+locations[i][4]+'">'+"Đặt bàn tại quán"+'</a>');
                         marker1.setAnimation(google.maps.Animation.BOUNCE);
                         infowindow.open(map, marker1);
                     }
@@ -73,7 +76,7 @@
 
 
             //     // // var marker11 = [
-            @foreach ($data_marker as $key => $value)
+           // @foreach ($data_marker as $key => $value)
                 // [{{ $value->id_quan }},{{ $value->kinhdo }},{{ $value->vido }}],
                 // @endforeach
             //     ];
@@ -94,7 +97,7 @@
 
             //SHOW MULTI MARKER
             // var some_mark,infoWindow;
-            @foreach ($data_marker as $key => $value)
+           // @foreach ($data_marker as $key => $value)
             
                 // var lat = {{ $value->kinhdo }};
                 // var lng = {{ $value->vido }};

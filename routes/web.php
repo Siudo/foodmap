@@ -61,3 +61,6 @@ Route::get('/tat-ca-loai', [LoaiQuanController::class , 'all_cate_res']);
 Route::get('/edit-cate-res/{id_loai}', [LoaiQuanController::class , 'edit_cate_res']);
 Route::post('/update-cate-res/{id_loai}', [LoaiQuanController::class , 'update_cate_res']);
 Route::get('/delete-cate-res/{id_loai}', [LoaiQuanController::class , 'delete_cate_res']);
+
+
+//Đặt bàn
