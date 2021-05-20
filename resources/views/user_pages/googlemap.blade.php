@@ -1,5 +1,12 @@
 @extends('welcome')
 @section('content')
+<style>
+    a.datban{
+        color: blue;
+        font-size: 16px;
+
+    }
+</style>
     <div class="about-low-area section-padding30">
         <div class="site-section ">
             <div class="container-fluid">
@@ -65,7 +72,7 @@
                 var url_datban = '{{URL::to("/datban/")}}'+'/';
                 google.maps.event.addListener(marker1, 'click', (function(marker1, i) {
                     return function() {
-                        infowindow.setContent( '<strong><b>' +locations[i][0]+'</b></strong> <br>'+'<p style:font-size:20px>' +locations[i][3] +'</p>'+'<a style:"color:blue !important"; href="'+url_datban+locations[i][4]+'">'+"Đặt bàn tại quán"+'</a>');
+                        infowindow.setContent( '<strong><b>' +locations[i][0]+'</b></strong> <br>'+'<p>' +locations[i][3] +'</p>'+'<a class="datban" href="'+url_datban+locations[i][4]+'">'+"Đặt bàn tại quán"+'</a>');
                         marker1.setAnimation(google.maps.Animation.BOUNCE);
                         infowindow.open(map, marker1);
                     }

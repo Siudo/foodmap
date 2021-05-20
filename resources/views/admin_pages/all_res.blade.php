@@ -28,7 +28,7 @@
                                         <tr>
                                             <th scope="row">{{ $in4_res->id_quan }}</th>
                                             <td>{{ $in4_res->tenquan }}</td>
-                                            <td>{{ $in4_res->trangthai }}</td>
+                                            <td>{{ $in4_res->tgianmocua }}</td>
                                             <td>{!! nl2br(e($in4_res->mota)) !!}</td>
                                             <td>{{ $in4_res->tenloai }}</td>
                                             <td>{{ $in4_res->diachi }}</td>

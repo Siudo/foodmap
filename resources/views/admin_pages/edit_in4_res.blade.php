@@ -22,10 +22,10 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="inputEmail3" class="col-sm-2 col-form-label">Trạng thái</label>
+                                            <label for="inputEmail3" class="col-sm-2 col-form-label">Thời gian mở cửa</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" name="status_res"
-                                                    value="{{ $value_in4->trangthai }}" id="inputEmail3"
+                                                    value="{{ $value_in4->tgianmocua }}" id="inputEmail3"
                                                     placeholder="Đóng || Mở cửa" required="">
                                             </div>
                                         </div>
@@ -50,6 +50,13 @@
 
                                             </fieldset>
                                         </div>
+
+                                        <div class="row form-group">
+                                            <div class="col-sm-2"><label for="file-multiple-input" class=" form-control-label">Ảnh giới thiệu</label></div>
+                                            <div class="col-sm-10"><input type="file" id="file-multiple-input" name="img_res"
+                                                    multiple="" class="form-control-file" required></div>
+                                        </div>
+                                        <br>
                                         <div class="form-group row">
                                             <label for="inputEmail3" class="col-sm-2 col-form-label">Vị trí</label>
                                             <div class="col-sm-10">

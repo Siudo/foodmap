@@ -11,7 +11,7 @@
                         <div class="card-body">
 
                             <div class="form-body">
-                                <form action="{{ URL::to('/save-in4') }}" method="post">
+                                <form action="{{ URL::to('/save-in4') }}" method="post" enctype="multipart/form-data">
                                     {{ csrf_field() }}
                                     <div class="form-group row">
                                         <label for="inputEmail3" class="col-sm-2 col-form-label">Tên quán</label>
@@ -21,7 +21,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Trạng thái</label>
+                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Thời gian mở cửa</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" name="status_res"
                                                 id="inputEmail3" placeholder="Đóng || Mở cửa" required="">
@@ -46,6 +46,11 @@
                                           
                                             
                                         </fieldset>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-2 col-form-label"><label for="file-multiple-input" class=" form-control-label">Ảnh giới thiệu</label></div>
+                                        <div class="col-sm-10"><input type="file" id="file-multiple-input" name="img_res"
+                                                multiple="" class="form-control-file" required></div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="inputEmail3" class="col-sm-2 col-form-label">Vị trí</label>

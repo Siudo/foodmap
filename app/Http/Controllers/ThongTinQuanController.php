@@ -21,22 +21,47 @@ class ThongTinQuanController extends Controller
     }
     public function add_in4(Request $request)
     {
-        $data = array();
-        $data['tenquan'] = $request->name_res;
-        $data['trangthai'] = $request->status_res;
-        $data['mota'] = $request->des_res;
-        $data['id_loai'] = $request->cate_res;
-       DB::table('quan')->insert($data);
-        $id_quan = DB::getPdo()->lastInsertId();
+        $data_quan = array();
+        $data_quan['tenquan'] = $request->name_res;
+        $data_quan['tgianmocua'] = $request->status_res;
+        $data_quan['mota'] = $request->des_res;
+        $data_quan['trangthai'] = true;
+        $data_quan['id_loai'] = $request->cate_res;
+    
+       
+        $get_image = $request->file('img_res');
+        if($get_image){
+            date_default_timezone_set('Asia/Ho_Chi_Minh');
+            $date = date('d-m-y--h-i-s');
+            $get_name_image = $get_image->getClientOriginalName();
+            $name_image = current(explode('.',$get_name_image));
+            $new_image = $date.'_'.$name_image.'.'.$get_image->getClientOriginalExtension();
+            $get_image->move('public/upload/res_img',$new_image);
+            $data_quan['hinhdd']= $new_image;
+            DB::table('quan')->insert($data_quan);
+            $id_quan = DB::getPdo()->lastInsertId();
+            $data_vitri = array();
+            $data_vitri['diachi'] = $request->address_res;
+            $data_vitri['kinhdo'] = $request->lat_res;
+            $data_vitri['vido'] = $request->lng_res;
+            $data_vitri['id_quan'] = $id_quan;
+       
+            DB::table('vitri')->insert($data_vitri);
+            return redirect('/tat-ca-quan');
+        }else{
+            $data['hinhdd']= null;
+            DB::table('quan')->insert($data);
+            $id_quan = DB::getPdo()->lastInsertId();
+            $data_vitri = array();
+            $data_vitri['diachi'] = $request->address_res;
+            $data_vitri['kinhdo'] = $request->lat_res;
+            $data_vitri['vido'] = $request->lng_res;
+            $data_vitri['id_quan'] = $id_quan;
+       
+            DB::table('vitri')->insert($data_vitri);
+            return redirect('/tat-ca-quan');
 
-        $data_vitri = array();
-        $data_vitri['diachi'] = $request->address_res;
-        $data_vitri['kinhdo'] = $request->lat_res;
-        $data_vitri['vido'] = $request->lng_res;
-        $data_vitri['id_quan'] = $id_quan;
-        
-       DB::table('vitri')->insert($data_vitri);
-       return redirect('/admin');
+        }
     }
     public function index_all_in4()
     {
@@ -55,18 +80,42 @@ class ThongTinQuanController extends Controller
     {
         $data_quan = array();
         $data_quan['tenquan'] = $request->name_res;
-        $data_quan['trangthai'] = $request->status_res;
+        $data_quan['tgianmocua'] = $request->status_res;
         $data_quan['mota'] = $request->des_res;
+        $data_quan['trangthai'] = true;
         $data_quan['id_loai'] = $request->cate_res;
-       DB::table('quan')->where('id_quan',$id_quan)->update($data_quan);
-
-       $data_vitri = array();
-       $data_vitri['diachi'] = $request->address_res;
-       $data_vitri['kinhdo'] = $request->lat_res;
-       $data_vitri['vido'] = $request->lng_res;
-       $data_vitri['id_quan'] = $id_quan;
+        $get_image = $request->file('img_res');
+        if($get_image){
+            date_default_timezone_set('Asia/Ho_Chi_Minh');
+            $date = date('d-m-y--h-i-s');
+            $get_name_image = $get_image->getClientOriginalName();
+            $name_image = current(explode('.',$get_name_image));
+            $new_image = $date.'_'.$name_image.'.'.$get_image->getClientOriginalExtension();
+            $get_image->move('public/upload/courseimage',$new_image);
+            $data_quan['hinhdd']= $new_image;
+            DB::table('quan')->where('id_quan',$id_quan)->update($data_quan);
+            $data_vitri = array();
+            $data_vitri['diachi'] = $request->address_res;
+            $data_vitri['kinhdo'] = $request->lat_res;
+            $data_vitri['vido'] = $request->lng_res;
+            $data_vitri['id_quan'] = $id_quan;
        
-      DB::table('vitri')->where('id_vitri',$id_vitri)->update($data_vitri);
-      return redirect('/tat-ca-quan');
+            DB::table('vitri')->where('id_vitri',$id_vitri)->update($data_vitri);
+            return redirect('/tat-ca-quan');
+        }else{
+            DB::table('quan')->where('id_quan',$id_quan)->update($data_quan);
+            $data_vitri = array();
+            $data_vitri['diachi'] = $request->address_res;
+            $data_vitri['kinhdo'] = $request->lat_res;
+            $data_vitri['vido'] = $request->lng_res;
+            $data_vitri['id_quan'] = $id_quan;
+       
+            DB::table('vitri')->where('id_vitri',$id_vitri)->update($data_vitri);
+            return redirect('/tat-ca-quan');
+
+        }
+      
+
+       
     }
 }

@@ -8,7 +8,7 @@ use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ThongTinQuanController;
 use App\Http\Controllers\LoaiQuanController;
-
+use App\Http\Controllers\DatBanController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -64,3 +64,5 @@ Route::get('/delete-cate-res/{id_loai}', [LoaiQuanController::class , 'delete_ca
 
 
 //Đặt bàn
+
+Route::get('/datban/{id_quan}', [DatBanController::class , 'index_datban']);
