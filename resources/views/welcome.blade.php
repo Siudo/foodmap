@@ -23,23 +23,7 @@
     <link rel="stylesheet" href="{{ asset('public/frontend/assets/css/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('public/frontend/assets/css/nice-select.css') }}">
     <link rel="stylesheet" href="{{ asset('public/frontend/assets/css/style.css') }}">
-    <style>
-        #floating-panel {
-            position: absolute;
-            top: 200px;
-            left: 25%;
-            z-index: 5;
-            background-color: #fff;
-            padding: 5px;
-            border: 1px solid #999;
-            text-align: center;
-            font-family: "Roboto", "sans-serif";
-            line-height: 30px;
-            padding-left: 10px;
-            width: 600px
-        }
-
-    </style>
+    
 </head>
 
 <body>

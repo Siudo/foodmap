@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ThongTinQuanController;
 use App\Http\Controllers\LoaiQuanController;
 use App\Http\Controllers\DatBanController;
+use App\Http\Controllers\tableController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,6 +30,11 @@ Route::get('/', [TrangchuController::class , 'index']);
 // USER MAP
 Route::get('/gmap', [GMapController::class , 'index']);
 
+
+
+//Đặt bàn
+
+Route::get('/datban/{id_quan}', [DatBanController::class , 'index_datban']);
 
 
 // USER login
@@ -63,6 +69,5 @@ Route::post('/update-cate-res/{id_loai}', [LoaiQuanController::class , 'update_c
 Route::get('/delete-cate-res/{id_loai}', [LoaiQuanController::class , 'delete_cate_res']);
 
 
-//Đặt bàn
-
-Route::get('/datban/{id_quan}', [DatBanController::class , 'index_datban']);
+//Ban
+Route::get('/them-ban', [tableController::class , 'index_add_table']);

@@ -40,7 +40,8 @@
                         <p class="pera-top">{{$values->tgianmocua}}</p>
 
                         <p  class="mb-65 pera-bottom">{!!nl2br($values->mota)!!}</p>
-                        <a href="about.html" class="border-btn">Đặt ngay !</a>
+                        <a href="#datb"  class="border-btn">Đặt ngay !</a>
+                        
                     </div>
                 </div>
             </div>
@@ -48,14 +49,14 @@
     </div>
 
     <!--? Booking Room Start-->
-    <div class="booking-area section-bg pt-120 pb-130" data-background="{{asset('public/frontend/assets/img/gallery/section_bg04.png')}}">
+    <div class="booking-area section-bg pt-120 pb-130" id="datb" data-background="{{asset('public/frontend/assets/img/gallery/section_bg04.png')}}">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="cl-xl-7 col-lg-8 col-md-10">
                     <!-- Section Tittle -->
                     <div class="section-tittle text-center mb-40">
-                        <span>About Our Restaurant</span>
-                        <h2>Book A Table</h2>
+                        <span>{{$values->tenquan}}</span>
+                        <h2>ĐẶT BÀN</h2>
                     </div> 
                 </div>
             </div>
