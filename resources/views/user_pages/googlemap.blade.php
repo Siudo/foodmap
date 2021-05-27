@@ -26,54 +26,23 @@
     <div class="about-low-area section-padding30">
         <div class="site-section ">
             <div class="container-fluid">
-                {{-- <div id="floating-panel" class="row">
+                <div id="floating-panel" class="row">
                     <div class="mt-10">
-                        <input type="text" name="lat_res" id="lat_res" class="single-input">
+                        <input type="hidden" name="lat_res" id="lat_res" class="single-input">
                     </div>
                     <div class=" mt-10">
-                        <input type="text" name="lng_res" id="lng_res" class="single-input">
+                        <input type="hidden" name="lng_res" id="lng_res" class="single-input">
                     </div>
                     <div class=" mt-10">
-                        <input type="text" name="lat_user" id="lat_user" class="single-input">
+                        <input type="hidden" name="lat_user" id="lat_user" class="single-input">
                     </div>
                     <div class=" mt-10">
-                        <input type="text" name="lng_user" id="lng_user" class="single-input">
+                        <input type="hidden" name="lng_user" id="lng_user" class="single-input">
                     </div>
-                    <button id="chiduong" class="border-btn header-btn">Chỉ đường</button>
-                </div> --}}
-
-                <div id="floating-panel">
-                    <b>Start: </b>
-                    <select id="start">
-                        <option value="chicago, il">Chicago</option>
-                        <option value="st louis, mo">St Louis</option>
-                        <option value="joplin, mo">Joplin, MO</option>
-                        <option value="oklahoma city, ok">Oklahoma City</option>
-                        <option value="amarillo, tx">Amarillo</option>
-                        <option value="gallup, nm">Gallup, NM</option>
-                        <option value="flagstaff, az">Flagstaff, AZ</option>
-                        <option value="winona, az">Winona</option>
-                        <option value="kingman, az">Kingman</option>
-                        <option value="barstow, ca">Barstow</option>
-                        <option value="san bernardino, ca">San Bernardino</option>
-                        <option value="los angeles, ca">Los Angeles</option>
-                    </select>
-                    <b>End: </b>
-                    <select id="end">
-                        <option value="chicago, il">Chicago</option>
-                        <option value="st louis, mo">St Louis</option>
-                        <option value="joplin, mo">Joplin, MO</option>
-                        <option value="oklahoma city, ok">Oklahoma City</option>
-                        <option value="amarillo, tx">Amarillo</option>
-                        <option value="gallup, nm">Gallup, NM</option>
-                        <option value="flagstaff, az">Flagstaff, AZ</option>
-                        <option value="winona, az">Winona</option>
-                        <option value="kingman, az">Kingman</option>
-                        <option value="barstow, ca">Barstow</option>
-                        <option value="san bernardino, ca">San Bernardino</option>
-                        <option value="los angeles, ca">Los Angeles</option>
-                    </select>
+                    <button id="btn_chiduong" class="border-btn header-btn">Chỉ đường</button>
                 </div>
+
+             
 
 
 
@@ -83,18 +52,15 @@
     </div>
 
     <script>
+
         function initMap() {
             var map = new google.maps.Map(document.getElementById("map"), {
-                // center: {
-                //     lat: 10.843371,
-                //     lng: 106.795153
-                // },
-                // zoom: 13,
-                zoom: 14,
                 center: {
-                    lat: 37.77,
-                    lng: -122.447
+                    lat: 10.843371,
+                    lng: 106.795153
                 },
+                zoom: 13,
+
             });
 
             var icon_marker = {
@@ -177,47 +143,22 @@
 
 
             // Direction
-            // const directionsService = new google.maps.DirectionsService();
-            // const directionsRenderer = new google.maps.DirectionsRenderer();
-            // directionsRenderer.setMap(map);
-
-            // const onChangeHandler = function() {
-            //    DisplayRoute(directionsService, directionsRenderer);
-            // };
-            // var btn_chiduong = document.getElementById('chiduong');
-            // document.getElementById('chiduong').addEventListener("click", onChangeHandler);
-
-
             const directionsService = new google.maps.DirectionsService();
             const directionsRenderer = new google.maps.DirectionsRenderer();
             directionsRenderer.setMap(map);
-
-            const onChangeHandler = function() {
+            document.getElementById("btn_chiduong").addEventListener("click", () => {
                 calculateAndDisplayRoute(directionsService, directionsRenderer);
-            };
-            document.getElementById("start").addEventListener("change", onChangeHandler);
-            document.getElementById("end").addEventListener("change", onChangeHandler);
+
+            });
+
+
+
+
+
         }
 
-        function calculateAndDisplayRoute(directionsService, directionsRenderer) {
-            directionsService.route({
-                    origin: {
-                        query: document.getElementById("start").value,
-                    },
-                    destination: {
-                        query: document.getElementById("end").value,
-                    },
-                    travelMode: google.maps.TravelMode.DRIVING,
-                },
-                (response, status) => {
-                    if (status === "OK") {
-                        directionsRenderer.setDirections(response);
-                    } else {
-                        window.alert("Directions request failed due to " + status);
-                    }
-                }
-            );
-        }
+
+
 
         // function DisplayRoute(directionsService, directionsRenderer) {
         //     // var location_user = new google.maps.myLatLng(document.getElementById('lat_user').value, document.getElementById(
@@ -244,6 +185,33 @@
         //         }
         //     );
         // }
+
+        function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+            //const selectedMode = document.getElementById("mode").value;
+
+            directionsService.route({
+                    // origin: location_user,
+                    // destination: location_res,
+                    origin: {
+                        lat: parseFloat(document.getElementById('lat_user').value),
+                        lng: parseFloat(document.getElementById('lng_user').value),
+                    },
+                    destination: {
+                        lat: parseFloat(document.getElementById('lat_res').value),
+                        lng: parseFloat(document.getElementById('lng_res').value),
+                    },
+                    travelMode: google.maps.TravelMode.DRIVING,
+                },
+                (response, status) => {
+                    if (status == "OK") {
+                        directionsRenderer.setDirections(response);
+                    } else {
+                        window.alert("Directions request failed due to " + status);
+                    }
+                }
+            );
+        }
+
 
         function handleLocationError(browserHasGeolocation, infoWindow, pos) {
             infoWindow.setPosition(pos);
