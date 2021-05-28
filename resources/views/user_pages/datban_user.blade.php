@@ -66,19 +66,14 @@
                         <div class="booking-wrap d-flex justify-content-between align-items-center">
                             <!-- Single Select Box -->
                             <div class="single-select-box mb-30">
-                                <div class="select-this">
-                                    <div class="select-itms">
-                                        <div class="select-icon">
-                                            <i class="ti-user"></i>
-                                        </div>
-                                        <select name="select" id="select1">
-                                            <option value="">Person</option>
-                                            <option value="">Person 2</option>
-                                            <option value="">Person 3</option>
-                                            <option value="">Person 4</option>
-                                        </select>
+                               
+                                    <div class="boking-datepicker">
+                                        <input type="text" name="last_name" placeholder="Số người tham gia"
+                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Số người tham gia'" required
+                                    class="single-input">
                                     </div>
-                                </div>
+                                    
+                             
                             </div>
                             <!-- select in date -->
                             <div class="single-select-box mb-30">
