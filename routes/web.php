@@ -35,6 +35,9 @@ Route::get('/gmap', [GMapController::class , 'index']);
 //Đặt bàn
 
 Route::get('/datban/{id_quan}', [DatBanController::class , 'index_datban']);
+Route::post('/save-datban/{id_quan}', [DatBanController::class , 'add_datban']);
+
+
 
 
 // USER login

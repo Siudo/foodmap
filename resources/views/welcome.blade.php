@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="{{ asset('public/frontend/assets/css/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('public/frontend/assets/css/nice-select.css') }}">
     <link rel="stylesheet" href="{{ asset('public/frontend/assets/css/style.css') }}">
-    
+
 </head>
 
 <body>
@@ -70,25 +70,36 @@
                                                 </ul>
                                             </li>
                                             <li><a href="contact.html">Contact</a></li>
+                                            @if (Session::get('id_user') == null)
+                                                <li>
+                                                    <a href="{{ URL::to('/login-user') }}">Đăng Nhập</a>
+                                                </li>
+                                            @else
+                                                <li >
+
+                                                   <a href="#" style="border: #ff5600; border-radius: 6px;" >{{ Session::get('tentk') }}</a>
+                                                        <ul class="submenu">
+                                                            <li><a href="#">Cá nhân</a></li>
+                                                            <li><a href="{{ URL::to('/logout')}}">Đăng xuất</a></li>
+                                                            
+                                                        </ul>
+                                                    </li>
+
+
+                                                    {{-- <ul class="dropdown">
+                                                <li><a href="#" class="nav-link">Thông tin</a></li>
+                                                <li><a href="{{ URL::to('/logout') }}" class="nav-link">Đăng xuất</a></li>
+        
+                                            </ul> --}}
+
+                                                {{-- </div> --}}
+                                            @endif
+
                                         </ul>
+
                                     </nav>
                                 </div>
-                                @if (Session::get('id_user') == null)
-                                    <div class="header-right-btn f-right d-none d-lg-block ml-20">
-                                        <a href="{{ URL::to('/login-user') }}" class="border-btn header-btn">Đăng
-                                            Nhập</a>
-                                    </div>
-                                @else
-                                    <div class="header-right-btn f-right d-none d-lg-block ml-20">
-                                        <a href="{{ URL::to('/logout') }}"
-                                            class="border-btn header-btn">{{ Session::get('tentk') }}</a>
-                                        {{-- <ul class="dropdown">
-                                            <li><a href="#" class="nav-link">Thông tin</a></li>
-                                            <li><a href="{{ URL::to('/logout') }}" class="nav-link">Đăng xuất</a></li>
 
-                                        </ul> --}}
-                                    </div>
-                                @endif
 
 
                             </div>
