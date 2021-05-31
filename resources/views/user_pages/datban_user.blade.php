@@ -69,7 +69,7 @@
                                     <!-- Single Select Box -->
                                     <div class="single-select-box mb-30">
                                         <div class="boking-datepicker">
-                                            <input type="text" name="last_name" placeholder="Số người tham gia"
+                                            <input type="text" name="songuoi_book" placeholder="Số người tham gia"
                                                 onfocus="this.placeholder = ''"
                                                 onblur="this.placeholder = 'Số người tham gia'" required
                                                 class="single-input">
@@ -96,7 +96,8 @@
                             </form>
                             <?php
                             $thanhcong = Session::get('thanhcong');
-                            $da_dk = Session::get('da_dk');
+                            $da_dk = Session::get('dadk');
+                            $error = Session::get('error');
                             if ($thanhcong) { ?>
                             <script>
                                 alert("Cảm ơn quý khách đã đặt bàn tại đây !");
@@ -104,11 +105,17 @@
                             </script>
                             <?php Session::put('thanhcong', null);} elseif ($da_dk) { ?>
                             <script>
-                                alert("Đã đăng ký khoá học này rồi");
+                                alert("Quý khách đã đặt bàn tại đây rồi !");
 
                             </script>
-                            <?php Session::put('da_dk', null);}
+                            <?php Session::put('dadk', null);}elseif ($error) {
                             ?>
+                            <script>
+                                alert("Thời gian đặt bàn không hợp lệ !");
+
+                            </script>
+                              <?php Session::put('error', null);}
+                                ?>
                         </div>
                     </div>
                 </div>
