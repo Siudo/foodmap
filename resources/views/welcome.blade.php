@@ -18,11 +18,13 @@
     <link rel="stylesheet" href="{{ asset('public/frontend/assets/css/gijgo.css') }}">
     <link rel="stylesheet" href="{{ asset('public/frontend/assets/css/animate.min.css') }}">
     <link rel="stylesheet" href="{{ asset('public/frontend/assets/css/magnific-popup.css') }}">
-    <link rel="stylesheet" href="{{ asset('public/frontend/assets/css/fontawesome-all.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('public/frontend/assets/css/fontawesome-all.min.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('public/frontend/assets/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('public/frontend/assets/css/themify-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('public/frontend/assets/css/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('public/frontend/assets/css/nice-select.css') }}">
     <link rel="stylesheet" href="{{ asset('public/frontend/assets/css/style.css') }}">
+   
 
 </head>
 
@@ -259,7 +261,7 @@
     <script src="{{ asset('public/frontend/assets/js/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('public/frontend/assets/js/mail-script.js') }}"></script>
     <script src="{{ asset('public/frontend/assets/js/jquery.ajaxchimp.min.js') }}"></script>
-
+    <script src="{{ asset('public/frontend/assets/js/all.min.js') }}"></script>
     <!-- Jquery Plugins, main Jquery -->
     <script src="{{ asset('public/frontend/assets/js/plugins.js') }}"></script>
     <script src="{{ asset('public/frontend/assets/js/main.js') }}"></script>

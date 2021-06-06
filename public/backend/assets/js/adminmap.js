@@ -11,6 +11,7 @@ function createMap() {
     var marker = new google.maps.Marker({ map: map });
     var inforWindow = new google.maps.InfoWindow();
     marker.setVisible(false);
+
     var searchBox = document.getElementById("searchmap");
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(searchBox);
     var autocomplete = new google.maps.places.Autocomplete(searchBox);
