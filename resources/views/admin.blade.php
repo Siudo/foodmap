@@ -133,54 +133,67 @@
                                     <i data-feather="bell"></i>
                                 </div>
                             </a>
+
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-large">
-                                <h6 class='py-2 px-4'>Notifications</h6>
+                                <h6 class='py-2 px-4'>Thông báo</h6>
+                                <div class="dropdown-divider"></div>
                                 <ul class="list-group rounded-none">
                                     <li class="list-group-item border-0 align-items-start">
+                                        @foreach ($data_mes as $key => $values)
+                                        @if ($values->trangthai_book)
                                         <div class="avatar bg-success mr-3">
                                             <span class="avatar-content"><i data-feather="shopping-cart"></i></span>
                                         </div>
                                         <div>
-                                            <h6 class='text-bold'>New Order</h6>
+                                            <h6 class='text-bold'>{{$values->tenkh}}</h6>
                                             <p class='text-xs'>
-                                                An order made by Ahmad Saugi for product Samsung Galaxy S69
+                                                Thời gian :  {{$values->ngaygio}}
+                                            </p>
+                                            <p class='text-xs'>
+                                                Số người:  {{$values->songuoi}}
+                                            </p>
+                                            <p class='text-xs'>
+                                                <a href="{{URL::to('/xacnhan/'.$values->id_datban)}}" class="btn btn-primary">
+                                                    Xác nhận
+                                                </a>
                                             </p>
                                         </div>
+                                        <div class="dropdown-divider"></div>
+                                   
+                                            
+                                        @else
+                                       
+                                   
+                                        @endif
+                                        
+                                        @endforeach
+                                        
                                     </li>
                                 </ul>
                             </div>
                         </li>
-                        <li class="dropdown nav-icon mr-2">
-                            <a href="#" data-toggle="dropdown"
-                                class="nav-link  dropdown-toggle nav-link-lg nav-link-user">
-                                <div class="d-lg-inline-block">
-                                    <i data-feather="mail"></i>
-                                </div>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#"><i data-feather="user"></i> Account</a>
-                                <a class="dropdown-item active" href="#"><i data-feather="mail"></i> Messages</a>
-                                <a class="dropdown-item" href="#"><i data-feather="settings"></i> Settings</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ URL::to('/logout') }}"><i
-                                        data-feather="log-out"></i>
-                                    Logout</a>
-                            </div>
-                        </li>
+                        
                         <li class="dropdown">
                             <a href="#" data-toggle="dropdown"
                                 class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                                 <div class="avatar mr-1">
-                                    <img src="assets/images/avatar/avatar-s-1.png" alt="" srcset="">
+                                   
+                                    <i class="fas fa-user"></i>
                                 </div>
-                                <div class="d-none d-md-block d-lg-inline-block">Hi, Saugi</div>
+                                <?php 
+                                 $ten_ql = Session::get('admin_name');
+                                 $id_ql = Session::get('admin_id');
+                                 
+                                ?>
+                               <div class="d-none d-md-block d-lg-inline-block">{{$ten_ql}} </div>
+                                
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item" href="#"><i data-feather="user"></i> Account</a>
                                 <a class="dropdown-item active" href="#"><i data-feather="mail"></i> Messages</a>
                                 <a class="dropdown-item" href="#"><i data-feather="settings"></i> Settings</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ URL::to('/logout') }}"><i
+                                <a class="dropdown-item" href="{{ URL::to('/logout-admin') }}"><i
                                         data-feather="log-out"></i>
                                     Logout</a>
                             </div>

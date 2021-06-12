@@ -35,9 +35,16 @@
                                             <td>
                                                 <a href="{{ URL::to('/edit-in4-res/' . $in4_res->id_quan) }}"><i
                                                         class="fas fa-pen-square" style="font-size:25px"></i></a>
+                                            @if ($in4_res->trangthai)
                                                 <a href="{{ URL::to('/delete-in4-res/' . $in4_res->id_quan) }}"
-                                                    onclick="return confirm('Are you sure to delete?')"><i
-                                                        class="fas fa-trash" style="font-size:25px"></i></a>
+                                                onclick="return confirm('Are you sure to hide it ?')"><i
+                                                class="fas fa-eye" style="font-size:25px"></i></a>
+                                            @else
+                                            <a href="{{ URL::to('/delete-in4-res/' . $in4_res->id_quan) }}"
+                                                onclick="return confirm('Are you sure to unhide it ?')"><i
+                                                class="fas fa-eye-slash" style="font-size:25px"></i></a>
+                                            @endif
+                                                
 
                                             </td>
 

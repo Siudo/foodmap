@@ -14,21 +14,44 @@ session_start();
 
 class ThongTinQuanController extends Controller
 {
+    public function AuthLogin()
+    {
+        $admin_id = Session::get('admin_id');
+        if($admin_id){
+            return Redirect::to('admin');
+        }
+        else{
+            return Redirect::to('login-admin')->send();
+        }
+    }
+    public function Roles()
+    {
+        
+    }
+
     public function index_add_in4()
     {
+        $this->AuthLogin();
+
+        $admin_id = Session::get('admin_id');
+        $data_mes = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->join('khachhang','khachhang.id_khachhang','datban.id_khachhang')->where('quan.id_quanli',$admin_id)->get();
+       
         $data = DB::table('loaiquan')->get();
-        return view('admin_pages.add_in4_Restaurant')->with('cate_res',$data);
+        return view('admin_pages.add_in4_Restaurant')->with('cate_res',$data)->with('data_mes',$data_mes);
     }
     public function add_in4(Request $request)
     {
+
+        $this->AuthLogin();
+       
         $data_quan = array();
         $data_quan['tenquan'] = $request->name_res;
         $data_quan['tgianmocua'] = $request->status_res;
         $data_quan['mota'] = $request->des_res;
         $data_quan['trangthai'] = true;
         $data_quan['id_loai'] = $request->cate_res;
-    
-       
+        $admin_id = Session::get('admin_id');
+        $data_quan['id_quanli'] = $admin_id;
         $get_image = $request->file('img_res');
         if($get_image){
             date_default_timezone_set('Asia/Ho_Chi_Minh');
@@ -65,25 +88,34 @@ class ThongTinQuanController extends Controller
     }
     public function index_all_in4()
     {
-        $data_quan = DB::table('quan')->join('loaiquan','loaiquan.id_loai','quan.id_loai')->join('vitri','vitri.id_quan','quan.id_quan')->get();
+        $this->AuthLogin();
+        $admin_id = Session::get('admin_id');
+        $data_mes = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->join('khachhang','khachhang.id_khachhang','datban.id_khachhang')->where('quan.id_quanli',$admin_id)->get();
+        $admin_id = Session::get('admin_id');
+        $data_quan = DB::table('quan')->join('loaiquan','loaiquan.id_loai','quan.id_loai')->join('vitri','vitri.id_quan','quan.id_quan')->where('id_quanli',$admin_id)->get();
         
 
-        return view('admin_pages.all_res')->with('all_in4',$data_quan);
+        return view('admin_pages.all_res')->with('all_in4',$data_quan)->with('data_mes',$data_mes);
     }
     public function edit_in4($id_quan)
     {
+        $this->AuthLogin();
+        $admin_id = Session::get('admin_id');
+        $data_mes = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->join('khachhang','khachhang.id_khachhang','datban.id_khachhang')->where('quan.id_quanli',$admin_id)->get();
         $data_quan = DB::table('quan')->join('loaiquan','loaiquan.id_loai','quan.id_loai')->join('vitri','vitri.id_quan','quan.id_quan')->where('quan.id_quan',$id_quan)->get();
         $data_loai = DB::table('loaiquan')->get();
-        return view('admin_pages.edit_in4_res')->with('all_in4',$data_quan)->with('cate_res',$data_loai);
+        return view('admin_pages.edit_in4_res')->with('all_in4',$data_quan)->with('cate_res',$data_loai)->with('data_mes',$data_mes);
     }
     public function update_in4($id_quan, $id_vitri, Request $request)
     {
+        $this->AuthLogin();
         $data_quan = array();
         $data_quan['tenquan'] = $request->name_res;
         $data_quan['tgianmocua'] = $request->status_res;
         $data_quan['mota'] = $request->des_res;
         $data_quan['trangthai'] = true;
         $data_quan['id_loai'] = $request->cate_res;
+        $data_quan['id_quanli'] = $admin_id;
         $get_image = $request->file('img_res');
         if($get_image){
             date_default_timezone_set('Asia/Ho_Chi_Minh');
@@ -115,7 +147,56 @@ class ThongTinQuanController extends Controller
 
         }
       
-
        
+    }
+
+    public function delete_in4_res($id_quan)
+    {
+        $this->AuthLogin();
+        $data_array = array();
+        $data = DB::table('quan')->where('id_quan',$id_quan)->first();
+    
+        if($data->trangthai){
+
+            $data_array['tenquan'] = $data->tenquan;
+            $data_array['tgianmocua'] = $data->tgianmocua;
+            $data_array['mota'] = $data->mota;
+            $data_array['trangthai'] = false;
+            $data_array['hinhdd'] = $data->hinhdd;
+            $data_array['id_loai'] = $data->id_loai;
+
+            DB::table('quan')->where('id_quan',$id_quan)->update($data_array);
+            return redirect('/tat-ca-quan');
+        }
+        else {
+            $data_array['tenquan'] = $data->tenquan;
+            $data_array['tgianmocua'] = $data->tgianmocua;
+            $data_array['mota'] = $data->mota;
+            $data_array['trangthai'] = true;
+            $data_array['hinhdd'] = $data->hinhdd;
+            $data_array['id_loai'] = $data->id_loai;
+            DB::table('quan')->where('id_quan',$id_quan)->update($data_array);
+            return redirect('/tat-ca-quan');
+        }
+    }
+    public function xacnhan_detail_order($id_datban)
+    {
+        $get_data = DB::table('datban')->where('id_datban',$id_datban)->first();
+        $data = array();
+        $data['id_datban'] = $id_datban;
+        $data['id_quan'] = $get_data->id_quan;
+        $data['id_khachhang'] = $get_data->id_khachhang;
+        $data['ngaygio'] = $get_data->ngaygio;
+        $data['songuoi'] = $get_data->songuoi;
+        $data['trangthai_book'] = false;
+        DB::table('datban')->where('id_datban',$id_datban)->update($data);
+        return redirect('/chitiet-datban');
+    }
+
+    public function detail_order()
+    {
+        $admin_id = Session::get('admin_id');
+        $data_mes = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->join('khachhang','khachhang.id_khachhang','datban.id_khachhang')->where('quan.id_quanli',$admin_id)->orderBy('id_datban','DESC')->get();
+        return view('admin_pages.detail_order')->with('data_mes',$data_mes);
     }
 }

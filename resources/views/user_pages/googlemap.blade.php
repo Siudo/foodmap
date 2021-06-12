@@ -23,6 +23,12 @@
             border-radius: 20px;
         }
 
+        .btn_pt{
+            border: none;
+            background: transparent;
+            cursor: pointer;
+        }
+
     </style>
     <div class="about-low-area section-padding30">
         <div class="site-section ">
@@ -36,15 +42,15 @@
                     <div class="row" id="mode-selector">
 
                         <div class="col">
-                            <a  id="changemode-walking" style="color: black; font-size:25px;"><i class="fas fa-car-alt"></i></a>
+                            <button class="btn_pt" id="changemode-walking" style="color: black; font-size:25px;"><i class="fas fa-car-alt"></i></button>
 
                         </div>
                         <div class="col">
-                            <a  id="changemode-transit" style="color: black; font-size:25px;"><i class="fas fa-bus"></i></a>
+                            <button class="btn_pt" id="changemode-transit" style="color: black; font-size:25px;"><i class="fas fa-bus"></i></button>
                         </div>
                         <div class="col">
-                            <a  id="changemode-driving" style="color: black; font-size:25px;"><i
-                                    class="fas fa-walking"></i></a>
+                            <button class="btn_pt" id="changemode-driving" style="color: black; font-size:25px;"><i
+                                    class="fas fa-walking"></i></button>
                         </div>
                     </div>
                     <div class="row">
@@ -198,6 +204,8 @@
 
             new AutocompleteDirectionsHandler(map);
 
+
+            
             // Direction
             // const directionsService = new google.maps.DirectionsService();
             // const directionsRenderer = new google.maps.DirectionsRenderer({
