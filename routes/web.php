@@ -64,7 +64,7 @@ Route::post('/update-in4-res/{id_quan}/{id_vitri}', [ThongTinQuanController::cla
 Route::get('/delete-in4-res/{id_quan}', [ThongTinQuanController::class , 'delete_in4_res']);
 Route::get('/chitiet-datban', [ThongTinQuanController::class , 'detail_order']);
 Route::get('/xacnhan/{id_datban}', [ThongTinQuanController::class , 'xacnhan_detail_order']);
-
+Route::get('/dashboard', [ThongTinQuanController::class , 'dashboard']);
 //Loai quan
 Route::get('/them-loai-quan', [LoaiQuanController::class , 'index_add_cate']);
 Route::post('/save-cate-res', [LoaiQuanController::class , 'save_cate_res']);

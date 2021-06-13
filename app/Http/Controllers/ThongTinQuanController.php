@@ -199,4 +199,18 @@ class ThongTinQuanController extends Controller
         $data_mes = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->join('khachhang','khachhang.id_khachhang','datban.id_khachhang')->where('quan.id_quanli',$admin_id)->orderBy('id_datban','DESC')->get();
         return view('admin_pages.detail_order')->with('data_mes',$data_mes);
     }
+
+
+    public function dashboard()
+    {
+        $admin_id = Session::get('admin_id');
+        $data_mes = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->join('khachhang','khachhang.id_khachhang','datban.id_khachhang')->where('quan.id_quanli',$admin_id)->orderBy('id_datban','DESC')->get();
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $book_onday = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->where('ngaygio',date('Y-m-d'))->where('quan.id_quanli',$admin_id)->count();
+      
+        return view('admin_pages.dashboard')->with('data_mes',$data_mes)->with('book_onday',$book_onday);
+    }
+
+
+
 }

@@ -86,23 +86,11 @@
 
                         </li>
 
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i data-feather="briefcase" width="20"></i>
-                                <span>Thông tin Bàn</span>
+                        <li class="sidebar-item ">
+                            <a href="{{ URL::to('/chitiet-datban') }}" class='sidebar-link'>
+                                <i class="fas fa-clipboard-list" width="20px"></i>
+                                <span>Thông tin đặt bàn</span>
                             </a>
-
-                            <ul class="submenu ">
-
-                                <li>
-                                    <a href="{{ URL::to('/them-ban') }}">Thêm Bàn</a>
-                                </li>
-
-                                <li>
-                                    <a href="{{ URL::to('/thong-tin-ban') }}">Thông tin bàn</a>
-                                </li>
-
-                            </ul>
 
                         </li>
 
