@@ -52,8 +52,9 @@ Route::post('/register', [RegisterUserController::class , 'regist_account']);
 
 
 // admin
-Route::get('/admin', [AdminController::class , 'index']);
-
+Route::get('/admin', [ThongTinQuanController::class , 'dashboard']);
+Route::get('/thay-doi-vitri', [ThongTinQuanController::class , 'edit_location']);
+Route::post('/save-location/{id_vitri}/{id_quan}', [ThongTinQuanController::class , 'save_location']);
 
 //Thong tin 
 Route::get('/them-thong-tin-quan', [ThongTinQuanController::class , 'index_add_in4']);

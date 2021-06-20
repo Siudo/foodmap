@@ -93,6 +93,13 @@
                             </a>
 
                         </li>
+                        <li class="sidebar-item ">
+                            <a href="{{ URL::to('/thay-doi-vitri') }}" class='sidebar-link'>
+                                <i class="fas fa-map-marker-alt" width="20px"></i>
+                                <span>Thay đổi vị trí</span>
+                            </a>
+
+                        </li>
 
 
 

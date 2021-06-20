@@ -28,6 +28,6 @@ class AdminController extends Controller
         $this->AuthLogin();
         $admin_id = Session::get('admin_id');
         $data_mes = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->join('khachhang','khachhang.id_khachhang','datban.id_khachhang')->where('quan.id_quanli',$admin_id)->get();
-        return view('admin')->with('data_mes',$data_mes);
+        return view('admin_pages.dashboard')->with('data_mes',$data_mes);
     }
 }

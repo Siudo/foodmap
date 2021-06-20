@@ -38,7 +38,8 @@ class DatBanController extends Controller
             $data_book['id_quan'] = $id_quan;
             $data_book['ngaygio'] = $time;
             $data_book['songuoi'] = $request->songuoi_book;
-            
+            $data_book['ngaydat'] = date('Y-m-d');
+            $data_book['trangthai_book'] = true;
        
             if (strtotime(date('Y-m-d H:i')) < strtotime($time)){
                 

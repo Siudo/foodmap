@@ -178,8 +178,10 @@
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
                         const pos = {
-                            lat: position.coords.latitude,
-                            lng: position.coords.longitude,
+                            // lat: position.coords.latitude,
+                            // lng: position.coords.longitude,
+                             lat: 10.8452971,
+                            lng: 106.7950824,
                         };
                         infoWindow.setPosition(pos);
                         var marker = new google.maps.Marker({
@@ -202,148 +204,149 @@
                 handleLocationError(false, infoWindow, map.getCenter());
             }
 
-            new AutocompleteDirectionsHandler(map);
+           
+           // new AutocompleteDirectionsHandler(map);
 
 
             
-            // Direction
-            // const directionsService = new google.maps.DirectionsService();
-            // const directionsRenderer = new google.maps.DirectionsRenderer({
-            //     suppressMarkers: true
-            // });
-            // directionsRenderer.setMap(map);
-            // document.getElementById("btn_chiduong").addEventListener("click", () => {
-            //     calculateAndDisplayRoute(directionsService, directionsRenderer);
+           // Direction
+            const directionsService = new google.maps.DirectionsService();
+            const directionsRenderer = new google.maps.DirectionsRenderer({
+                suppressMarkers: true
+            });
+            directionsRenderer.setMap(map);
+            document.getElementById("btn_chiduong").addEventListener("click", () => {
+                calculateAndDisplayRoute(directionsService, directionsRenderer);
 
-            // });
+            });
 
 
         }
 
 
 
-        // function calculateAndDisplayRoute(directionsService, directionsRenderer) {
-        //     directionsService.route({
-        //             // origin: location_user,
-        //             // destination: location_res,
-        //             origin: {
-        //                 lat: parseFloat(document.getElementById('lat_user').value),
-        //                 lng: parseFloat(document.getElementById('lng_user').value),
-        //             },
-        //             destination: {
-        //                 lat: parseFloat(document.getElementById('lat_res').value),
-        //                 lng: parseFloat(document.getElementById('lng_res').value),
-        //             },
-        //             travelMode: google.maps.TravelMode.WALKING,
-        //         },
-        //         (response, status) => {
-        //             if (status == "OK") {
-        //                 directionsRenderer.setDirections(response);
-        //                 var leg = response.routes[0].legs[0];
-        //                 var marker = new google.maps.Marker({
-        //                     position: leg.start_location,
-        //                 });
-        //                 var marker1 = new google.maps.Marker({
-        //                     position: leg.end_location,
-        //                 });
-        //             } else {
-        //                 window.alert("Directions request failed due to " + status);
-        //             }
-        //         }
-        //     );
-        // }
+        function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+            directionsService.route({
+                    // origin: location_user,
+                    // destination: location_res,
+                    origin: {
+                        lat: parseFloat(document.getElementById('lat_user').value),
+                        lng: parseFloat(document.getElementById('lng_user').value),
+                    },
+                    destination: {
+                        lat: parseFloat(document.getElementById('lat_res').value),
+                        lng: parseFloat(document.getElementById('lng_res').value),
+                    },
+                    travelMode: google.maps.TravelMode.WALKING,
+                },
+                (response, status) => {
+                    if (status == "OK") {
+                        directionsRenderer.setDirections(response);
+                        var leg = response.routes[0].legs[0];
+                        var marker = new google.maps.Marker({
+                            position: leg.start_location,
+                        });
+                        var marker1 = new google.maps.Marker({
+                            position: leg.end_location,
+                        });
+                    } else {
+                        window.alert("Directions request failed due to " + status);
+                    }
+                }
+            );
+        }
 
 
         ///////////////    AUTO COMPLETE & DIRECTIONS  ////////////////////////////////////
-        class AutocompleteDirectionsHandler {
-            constructor(map) {
-                this.map = map;
-                this.originPlaceId = "";
-                this.destinationPlaceId = "";
-                this.travelMode = google.maps.TravelMode.WALKING;
-                this.directionsService = new google.maps.DirectionsService();
-                this.directionsRenderer = new google.maps.DirectionsRenderer();
-                this.directionsRenderer.setMap(map);
-                const originInput = document.getElementById("org_input");
-                const destinationInput = document.getElementById("des_input");
-                const modeSelector = document.getElementById("mode-selector");
-                const originAutocomplete = new google.maps.places.Autocomplete(originInput);
-                // Specify just the place data fields that you need.
-                originAutocomplete.setFields(["place_id"]);
-                const destinationAutocomplete = new google.maps.places.Autocomplete(
-                    destinationInput
-                );
-                // Specify just the place data fields that you need.
-                destinationAutocomplete.setFields(["place_id"]);
-                this.setupClickListener(
-                    "changemode-walking",
-                    google.maps.TravelMode.WALKING
-                );
-                this.setupClickListener(
-                    "changemode-transit",
-                    google.maps.TravelMode.TRANSIT
-                );
-                this.setupClickListener(
-                    "changemode-driving",
-                    google.maps.TravelMode.DRIVING
-                );
-                this.setupPlaceChangedListener(originAutocomplete, "ORIG");
-                this.setupPlaceChangedListener(destinationAutocomplete, "DEST");
-                this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(originInput);
-                this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(destinationInput);
-                this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(modeSelector);
-            }
-            // Sets a listener on a radio button to change the filter type on Places
-            // Autocomplete.
-            setupClickListener(id, mode) {
-                const radioButton = document.getElementById(id);
-                radioButton.addEventListener("click", () => {
-                    this.travelMode = mode;
-                    this.route();
-                });
-            }
-            setupPlaceChangedListener(autocomplete, mode) {
-                autocomplete.bindTo("bounds", this.map);
-                autocomplete.addListener("place_changed", () => {
-                    const place = autocomplete.getPlace();
+        // class AutocompleteDirectionsHandler {
+        //     constructor(map) {
+        //         this.map = map;
+        //         this.originPlaceId = "";
+        //         this.destinationPlaceId = "";
+        //         this.travelMode = google.maps.TravelMode.WALKING;
+        //         this.directionsService = new google.maps.DirectionsService();
+        //         this.directionsRenderer = new google.maps.DirectionsRenderer();
+        //         this.directionsRenderer.setMap(map);
+        //         const originInput = document.getElementById("org_input");
+        //         const destinationInput = document.getElementById("des_input");
+        //         const modeSelector = document.getElementById("mode-selector");
+        //         const originAutocomplete = new google.maps.places.Autocomplete(originInput);
+        //         // Specify just the place data fields that you need.
+        //         originAutocomplete.setFields(["place_id"]);
+        //         const destinationAutocomplete = new google.maps.places.Autocomplete(
+        //             destinationInput
+        //         );
+        //         // Specify just the place data fields that you need.
+        //         destinationAutocomplete.setFields(["place_id"]);
+        //         this.setupClickListener(
+        //             "changemode-walking",
+        //             google.maps.TravelMode.WALKING
+        //         );
+        //         this.setupClickListener(
+        //             "changemode-transit",
+        //             google.maps.TravelMode.TRANSIT
+        //         );
+        //         this.setupClickListener(
+        //             "changemode-driving",
+        //             google.maps.TravelMode.DRIVING
+        //         );
+        //         this.setupPlaceChangedListener(originAutocomplete, "ORIG");
+        //         this.setupPlaceChangedListener(destinationAutocomplete, "DEST");
+        //         this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(originInput);
+        //         this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(destinationInput);
+        //         this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(modeSelector);
+        //     }
+        //     // Sets a listener on a radio button to change the filter type on Places
+        //     // Autocomplete.
+        //     setupClickListener(id, mode) {
+        //         const radioButton = document.getElementById(id);
+        //         radioButton.addEventListener("click", () => {
+        //             this.travelMode = mode;
+        //             this.route();
+        //         });
+        //     }
+        //     setupPlaceChangedListener(autocomplete, mode) {
+        //         autocomplete.bindTo("bounds", this.map);
+        //         autocomplete.addListener("place_changed", () => {
+        //             const place = autocomplete.getPlace();
 
-                    if (!place.place_id) {
-                        window.alert("Please select an option from the dropdown list.");
-                        return;
-                    }   
+        //             if (!place.place_id) {
+        //                 window.alert("Please select an option from the dropdown list.");
+        //                 return;
+        //             }   
 
-                    if (mode === "ORIG") {
-                        this.originPlaceId = place.place_id;
-                    } else {
-                        this.destinationPlaceId = place.place_id;
-                    }
-                    this.route();
-                });
-            }
-            route() {
-                if (!this.originPlaceId || !this.destinationPlaceId) {
-                    return;
-                }
-                const me = this;
-                this.directionsService.route({
-                        origin: {
-                            placeId: this.originPlaceId
-                        },
-                        destination: {
-                            placeId: this.destinationPlaceId
-                        },
-                        travelMode: this.travelMode,
-                    },
-                    (response, status) => {
-                        if (status === "OK") {
-                            me.directionsRenderer.setDirections(response);
-                        } else {
-                            window.alert("Directions request failed due to " + status);
-                        }
-                    }
-                );
-            }
-        }
+        //             if (mode === "ORIG") {
+        //                 this.originPlaceId = place.place_id;
+        //             } else {
+        //                 this.destinationPlaceId = place.place_id;
+        //             }
+        //             this.route();
+        //         });
+        //     }
+        //     route() {
+        //         if (!this.originPlaceId || !this.destinationPlaceId) {
+        //             return;
+        //         }
+        //         const me = this;
+        //         this.directionsService.route({
+        //                 origin: {
+        //                     placeId: this.originPlaceId
+        //                 },
+        //                 destination: {
+        //                     placeId: this.destinationPlaceId
+        //                 },
+        //                 travelMode: this.travelMode,
+        //             },
+        //             (response, status) => {
+        //                 if (status === "OK") {
+        //                     me.directionsRenderer.setDirections(response);
+        //                 } else {
+        //                     window.alert("Directions request failed due to " + status);
+        //                 }
+        //             }
+        //         );
+        //     }
+        // }
 
 
 

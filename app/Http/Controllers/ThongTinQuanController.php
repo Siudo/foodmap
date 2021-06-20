@@ -195,6 +195,7 @@ class ThongTinQuanController extends Controller
 
     public function detail_order()
     {
+        $this->AuthLogin();
         $admin_id = Session::get('admin_id');
         $data_mes = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->join('khachhang','khachhang.id_khachhang','datban.id_khachhang')->where('quan.id_quanli',$admin_id)->orderBy('id_datban','DESC')->get();
         return view('admin_pages.detail_order')->with('data_mes',$data_mes);
@@ -203,14 +204,36 @@ class ThongTinQuanController extends Controller
 
     public function dashboard()
     {
+        $this->AuthLogin();
         $admin_id = Session::get('admin_id');
         $data_mes = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->join('khachhang','khachhang.id_khachhang','datban.id_khachhang')->where('quan.id_quanli',$admin_id)->orderBy('id_datban','DESC')->get();
         date_default_timezone_set('Asia/Ho_Chi_Minh');
-        $book_onday = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->where('ngaygio',date('Y-m-d'))->where('quan.id_quanli',$admin_id)->count();
-      
-        return view('admin_pages.dashboard')->with('data_mes',$data_mes)->with('book_onday',$book_onday);
+        $book_onday = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->where('ngaydat',date('Y-m-d'))->where('quan.id_quanli',$admin_id)->count();
+        $ds_book = DB::table('datban')->join('khachhang','khachhang.id_khachhang','datban.id_khachhang')->join('quan','quan.id_quan','datban.id_quan')->where('ngaydat',date('Y-m-d'))->where('quan.id_quanli',$admin_id)->get();
+        return view('admin_pages.dashboard')->with('data_mes',$data_mes)->with('book_onday',$book_onday)->with('ds_book',$ds_book);
     }
 
+    public function edit_location()
+    {
+        $this->AuthLogin();
+        $admin_id = Session::get('admin_id');
+        $data_mes = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->join('khachhang','khachhang.id_khachhang','datban.id_khachhang')->where('quan.id_quanli',$admin_id)->orderBy('id_datban','DESC')->get();
+        
+        $data_res = DB::table('quan')->join('vitri','vitri.id_quan','quan.id_quan')->where('quan.id_quanli',$admin_id)->get();
+        
+        return view('admin_pages.locations_res')->with('data_mes',$data_mes)->with('data_res',$data_res);
+    }
 
+    public function save_location($id_vitri,$id_quan, Request $request)
+    {
+        $data = array();
+        $data['diachi'] = $request->address_res;
+        $data['vido'] = $request->lat_res;
+        $data['kinhdo'] = $request->lng_res;
+        $data['id_quan'] = $id_quan;
+        DB::table('vitri')->where('id_vitri',$id_vitri)->update($data);
+        return redirect('/tat-ca-quan');
+
+    }
 
 }
