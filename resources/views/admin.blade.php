@@ -81,6 +81,7 @@
                                 <li>
                                     <a href="{{ URL::to('/tat-ca-loai') }}">Tất cả Loại</a>
                                 </li>
+                                
 
                             </ul>
 
@@ -100,6 +101,48 @@
                             </a>
 
                         </li>
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="fas fa-bookmark" width="20px"></i>
+                                <span>Loại thực đơn</span>
+                            </a>
+
+                            <ul class="submenu ">
+
+                                <li>
+                                    <a href="{{ URL::to('/them-loai-thucdon') }}" >Loại thực đơn</a>
+                                </li>
+
+                                <li>
+                                    <a href="{{ URL::to('/tatca-loai-thucdon') }}">Tất cả Loại Thực Đơn</a>
+                                </li>
+                                
+
+                            </ul>
+
+                        </li>
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="fas fa-bookmark" width="20px"></i>
+                                <span>Thực Đơn</span>
+                            </a>
+
+                            <ul class="submenu ">
+
+                               
+                                <li>
+                                    <a href="{{ URL::to('/them-thucdon') }}">Thêm thực đơn</a>
+                                </li>
+                                <li>
+                                    <a href="{{ URL::to('/them-mon') }}">Thêm món</a>
+                                </li>
+                                <li>
+                                    <a href="{{ URL::to('/tatca-mon') }}">Tất cả món</a>
+                                </li>
+                            </ul>
+
+                        </li>
+                       
 
 
 

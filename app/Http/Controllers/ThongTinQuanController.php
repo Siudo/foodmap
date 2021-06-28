@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Imports\ThucDonImports;
+use Excel;
+use ThucDon;
 
 
 use DB;
@@ -235,5 +238,141 @@ class ThongTinQuanController extends Controller
         return redirect('/tat-ca-quan');
 
     }
+
+
+    // cate Menu
+
+    public function index_add_cate_menu()
+    {
+        $this->AuthLogin();
+        $admin_id = Session::get('admin_id');
+        $data_mes = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->join('khachhang','khachhang.id_khachhang','datban.id_khachhang')->where('quan.id_quanli',$admin_id)->orderBy('id_datban','DESC')->get();
+
+        return view('admin_pages.add_cate_menu')->with('data_mes',$data_mes);
+    }
+
+    public function save_cate_menu(Request $request)
+    {
+        $this->AuthLogin();
+
+        $data_cate = array();
+        $data_cate['tenloaitd'] = $request->cate_menu;
+        DB::table('loaithucdon')->insert($data_cate);
+        return redirect('/tatca-loai-thucdon');
+    }
+    public function index_all_cate_menu()
+    {
+        $this->AuthLogin();
+        $admin_id = Session::get('admin_id');
+        $data_mes = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->join('khachhang','khachhang.id_khachhang','datban.id_khachhang')->where('quan.id_quanli',$admin_id)->orderBy('id_datban','DESC')->get();
+
+        $data_menu = DB::table('loaithucdon')->get();
+        return view('admin_pages.all_cate_menu')->with('data_mes',$data_mes)->with('menu',$data_menu);
+    }
+
+    //Menu
+
+    public function index_add_menu()
+    {
+        $this->AuthLogin();
+        $admin_id = Session::get('admin_id');
+        $data_mes = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->join('khachhang','khachhang.id_khachhang','datban.id_khachhang')->where('quan.id_quanli',$admin_id)->orderBy('id_datban','DESC')->get();
+       
+       
+        
+        $data_loai = DB::table('loaithucdon')->get();
+        return view('admin_pages.add_menu')->with('data_mes',$data_mes)->with('cate_menu',$data_loai);
+    }
+
+    public function save_menu(Request $request)
+    {
+        // $this->validate($request,[
+        //     'exc_menu' => 'require|mimes:xls,xlsx'
+        // ]);
+        $id_loaitd = $request->cate_menu;
+        Session::put('id_loaitd',$id_loaitd);
+        $admin_id = Session::get('admin_id');
+        $id_quan = DB::table('quan')->where('id_quanli',$admin_id)->first()->id_quan;
+        Session::put('id_quan',$id_quan);
+        $path = $request->file('exc_menu')->getRealPath();
+        Excel::import(new ThucDonImports, $path);
+        return back();
+
+    }
+
+    //Mon an
+    public function index_add_dish()
+    {
+        $this->AuthLogin();
+        $admin_id = Session::get('admin_id');
+        $data_mes = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->join('khachhang','khachhang.id_khachhang','datban.id_khachhang')->where('quan.id_quanli',$admin_id)->orderBy('id_datban','DESC')->get();
+
+        $data_loai = DB::table('loaithucdon')->get();
+        return view('admin_pages.add_a_dish')->with('data_mes',$data_mes)->with('cate_menu',$data_loai);
+    }
+
+    public function save_dish(Request $request)
+    {
+
+        $admin_id = Session::get('admin_id');
+        $id_quan = DB::table('quan')->where('id_quanli',$admin_id)->first()->id_quan;
+
+
+
+        $data = array();
+        $data['tenmon'] = $request->dish_name;
+        $data['gia'] = $request->dish_price;
+        $data['loaimon'] = $request->dish_cate;
+        $data['id_loaitd'] =  $request->cate_menu;
+        $data['id_quan'] =  $id_quan;
+        DB::table('thucdon')->insert($data);
+        return redirect('/tatca-mon');
+
+
+    }
+
+    public function all_menu()
+    {
+        $this->AuthLogin();
+        $admin_id = Session::get('admin_id');
+        $data_mes = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->join('khachhang','khachhang.id_khachhang','datban.id_khachhang')->where('quan.id_quanli',$admin_id)->orderBy('id_datban','DESC')->get();
+        $id_quan = DB::table('quan')->where('id_quanli',$admin_id)->first()->id_quan;
+
+        $data_menu = DB::table('thucdon')->where('id_quan',$id_quan)->get();
+        return view('admin_pages.all_menu')->with('data_mes',$data_mes)->with('all_menu',$data_menu);
+    }
+
+    public function index_edit_dish($id_thucdon)
+    {
+        $this->AuthLogin();
+        $admin_id = Session::get('admin_id');
+        $data_mes = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->join('khachhang','khachhang.id_khachhang','datban.id_khachhang')->where('quan.id_quanli',$admin_id)->orderBy('id_datban','DESC')->get();
+
+        $data_loai = DB::table('loaithucdon')->get();
+
+        $data_thucdon = DB::table('thucdon')->where('id_thucdon',$id_thucdon)->get();
+
+
+        return view('admin_pages.edit_dish')->with('data_mes',$data_mes)->with('cate_menu',$data_loai)->with('menu',$data_thucdon);
+    }
+
+    public function update_dish($id_thucdon ,Request $request)
+    {
+        $admin_id = Session::get('admin_id');
+        $id_quan = DB::table('quan')->where('id_quanli',$admin_id)->first()->id_quan;
+
+
+
+        $data = array();
+        $data['tenmon'] = $request->dish_name;
+        $data['gia'] = $request->dish_price;
+        $data['loaimon'] = $request->dish_cate;
+        $data['id_loaitd'] =  $request->cate_menu;
+        $data['id_quan'] =  $id_quan;
+        DB::table('thucdon')->where('id_thucdon',$id_thucdon)->update($data);
+        
+        return redirect('/tatca-mon');
+    }
+
 
 }

@@ -56,6 +56,23 @@ Route::get('/admin', [ThongTinQuanController::class , 'dashboard']);
 Route::get('/thay-doi-vitri', [ThongTinQuanController::class , 'edit_location']);
 Route::post('/save-location/{id_vitri}/{id_quan}', [ThongTinQuanController::class , 'save_location']);
 
+
+//ThucDon
+Route::get('/them-loai-thucdon', [ThongTinQuanController::class , 'index_add_cate_menu']);
+Route::post('/save-cate-menu', [ThongTinQuanController::class , 'save_cate_menu']);
+Route::get('/tatca-loai-thucdon', [ThongTinQuanController::class , 'index_all_cate_menu']);
+
+Route::get('/them-thucdon', [ThongTinQuanController::class , 'index_add_menu']);
+Route::post('/save-menu', [ThongTinQuanController::class , 'save_menu']);
+
+Route::get('/them-mon', [ThongTinQuanController::class , 'index_add_dish']);
+Route::post('/save-dish', [ThongTinQuanController::class , 'save_dish']);
+Route::get('/tatca-mon', [ThongTinQuanController::class , 'all_menu']);
+Route::get('/edit-mon/{id_thucdon}', [ThongTinQuanController::class , 'index_edit_dish']);
+Route::post('/update-dish/{id_thucdon}', [ThongTinQuanController::class , 'update_dish']);
+
+
+
 //Thong tin 
 Route::get('/them-thong-tin-quan', [ThongTinQuanController::class , 'index_add_in4']);
 Route::post('/save-in4', [ThongTinQuanController::class , 'add_in4']);
