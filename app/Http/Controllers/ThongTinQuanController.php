@@ -374,5 +374,7 @@ class ThongTinQuanController extends Controller
         return redirect('/tatca-mon');
     }
 
+   
+
 
 }

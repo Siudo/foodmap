@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="{{ asset('public/frontend/assets/css/themify-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('public/frontend/assets/css/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('public/frontend/assets/css/nice-select.css') }}">
+    
+    <link rel="stylesheet" href="{{ asset('public/frontend/assets/css/menu_res.css') }}">
     <link rel="stylesheet" href="{{ asset('public/frontend/assets/css/style.css') }}">
    
 
@@ -81,7 +83,7 @@
 
                                                    <a href="#" style="border: #ff5600; border-radius: 6px;" >{{ Session::get('tentk') }}</a>
                                                         <ul class="submenu">
-                                                            <li><a href="#">Cá nhân</a></li>
+                                                            <li><a href="{{URL::to('/profile')}}">Cá nhân</a></li>
                                                             <li><a href="{{ URL::to('/logout')}}">Đăng xuất</a></li>
                                                             
                                                         </ul>

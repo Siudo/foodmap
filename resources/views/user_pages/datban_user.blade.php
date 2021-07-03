@@ -101,117 +101,68 @@
                             if ($thanhcong) { ?>
                             <script>
                                 alert("Cảm ơn quý khách đã đặt bàn tại đây !");
-
                             </script>
                             <?php Session::put('thanhcong', null);} elseif ($da_dk) { ?>
                             <script>
                                 alert("Quý khách đã đặt bàn tại đây rồi !");
-
                             </script>
-                            <?php Session::put('dadk', null);}elseif ($error) {
-                            ?>
+                            <?php Session::put('dadk', null);} elseif ($error) { ?>
                             <script>
                                 alert("Thời gian đặt bàn không hợp lệ !");
-
                             </script>
-                              <?php Session::put('error', null);}
-                                ?>
+                            <?php Session::put('error', null);}
+                            ?>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- Booking Room End-->
-            <!--? About Area Start -->
-            <div class="about-low-area section-padding30">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-lg-6 col-md-12">
-                            <div class="about-caption mb-50">
-                                <!-- Section Tittle -->
-                                <div class="section-tittle mb-35">
-                                    <span>Discover Your Test</span>
-                                    <h2>We Provide Good Food For Your Family!</h2>
-                                </div>
-                                <p>Ut enim acgsd minim veniam, quxcis nostrud exercitation ullamco laboris nisi ufsit
-                                    aliquip ex ea commodo consequat is aute irure m, quis nostrud exer.</p>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
-                                    <div class="single-caption mb-20">
-                                        <div class="caption-icon">
-                                            <span class="flaticon-restaurant"></span>
-                                        </div>
-                                        <div class="caption">
-                                            <p>Ut enim ad minim veniam, quis nostrud exer.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
-                                    <div class="single-caption mb-20">
-                                        <div class="caption-icon">
-                                            <span class="flaticon-tools-and-utensils-1"></span>
-                                        </div>
-                                        <div class="caption">
-                                            <p>Ut enim ad minim veniam, quis nostrud exer.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
-                                    <div class="single-caption mb-20">
-                                        <div class="caption-icon">
-                                            <span class="flaticon-hat"></span>
-                                        </div>
-                                        <div class="caption">
-                                            <p>Ut enim ad minim veniam, quis nostrud exer.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
-                                    <div class="single-caption mb-20">
-                                        <div class="caption-icon">
-                                            <span class="flaticon-restaurant"></span>
-                                        </div>
-                                        <div class="caption">
-                                            <p>Ut enim ad minim veniam, quis nostrud exer.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-12">
-                            <!-- about-img -->
-                            <div class="about-img ">
-                                <img src="{{ URL::to('public/frontend/assets/img/gallery/about.png') }}" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- About Area End -->
+
             <!--? About-3 Start -->
-            <div class="about-area3 pt-180 pb-170 section-bg"
-                data-background="{{ asset('public/frontend/assets/img/gallery/section_bg03.png') }}">
+            <div id="restaurant-menu">
                 <div class="container">
-                    <div class="row justify-content-end">
-                        <div class="col-xl-6 col-lg-6 col-md-9 col-sm-11">
-                            <!-- Section Tittle -->
-                            <div class="section-tittle section-tittle2 mb-40">
-                                <span>About Our Restaurant</span>
-                                <h2>We Provide Good Food For Your Family!</h2>
-                                <p>Ut enim acgsd minim veniam, quxcis nostrud exercitation ullamco laboris nisi ufsit
-                                    aliquip ex ea commodo consequat is aute irure m, quis nostrud exer.</p>
-                            </div>
-                            <!--Hero form -->
-                            <form action="#" class="search-box">
-                                <div class="input-form">
-                                    <input type="text" placeholder="Your Email">
-                                </div>
-                                <div class="search-form">
-                                    <button>Subscribe</button>
-                                </div>
-                            </form>
-                        </div>
+                    <div class="section-title text-center">
+                        <h2>Menu</h2>
                     </div>
+                    <div class="row">
+                        <form class="row" style="width:100%" action="{{ URL::to('/save-mon') }}" method="post">
+                            {{ csrf_field() }}
+                            @foreach ($loaitd as $key => $value_loaitd)
+                                <div class="col-xs-12 col-sm-6" >
+                                    <div class="menu-section">
+
+                                        <h2 class="menu-section-title">{{ $value_loaitd->tenloaitd }}</h2>
+                                        @foreach ($menu as $key => $value_menu)
+                                            @php
+                                                $id_loaitd = $value_loaitd->id_loaitd;
+                                                $id_menu = $value_menu->id_loaitd;
+                                            @endphp
+                                            @if ($id_loaitd == $id_menu)
+
+                                                <div class="menu-item">
+
+                                                    <input class="primary-checkbox" name="chon_mon[]" value="{{ $value_menu->id_thucdon }}"
+                                                        type="checkbox" id="default-checkbox">
+
+
+                                                    <div class="menu-item-name">{{ $value_menu->tenmon }}</div>
+                                                    <div class="menu-item-price"> {{ $value_menu->gia }} </div>
+                                                    <div class="menu-item-description"> {{ $value_menu->loaimon }} </div>
+                                                </div>
+
+                                               
+                                            @endif
+
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endforeach
+                            <button data-toggle="modal" class="btn select-btn">Book
+                                Now</button>
+                        </form>
+
+                    </div>
+
                 </div>
             </div>
             <!-- About-3 End -->

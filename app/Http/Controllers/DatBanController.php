@@ -17,7 +17,17 @@ class DatBanController extends Controller
     public function index_datban($id_quan)
     {
         $data = DB::table('quan')->where('id_quan',$id_quan)->get();
-       return view('user_pages.datban_user')->with('data_quan',$data);
+
+
+        $menu = DB::table('thucdon')->where('thucdon.id_quan',$id_quan)->orderby('loaimon')->get();
+
+        $loai = DB::table('loaithucdon')->join('thucdon','loaithucdon.id_loaitd','thucdon.id_loaitd')->select('loaithucdon.id_loaitd','loaithucdon.tenloaitd')->where('thucdon.id_quan',$id_quan)->groupbyraw('loaithucdon.id_loaitd,loaithucdon.tenloaitd')->get();
+  
+        // echo '<pre>';
+        // print_r($loai);
+        // echo '</pre>';
+
+      return view('user_pages.datban_user')->with('data_quan',$data)->with('menu',$menu)->with('loaitd',$loai);
     }
     public function add_datban($id_quan, Request $request)
     {
@@ -76,4 +86,42 @@ class DatBanController extends Controller
            
         }
     }
+
+    public function authlogin()
+    {
+        $id_tk = Session::get("id_user");
+        $tentk = Session::get("tentk");
+        if($id_tk){
+            return Redirect::to('/profile');
+        }
+        else{
+            return Redirect::to('login-user')->send();
+        }
+    }
+
+    public function index_profile()
+    {
+        $this->authlogin();
+        return view('user_profile');
+    }
+  
+    public function profile_datban()
+    {
+        $this->authlogin();
+        $id_tk = Session::get("id_user");
+        $id_kh = DB::table('khachhang')->where('id_tkkh',$id_tk)->first()->id_khachhang;
+
+        $data_book = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->where('id_khachhang',$id_kh)->get();
+        return view('profile_user.in4_prof_book')->with('all_in4',$data_book);
+    }
+
+    public function profile_menu($id_datban)
+    {
+        $this->authlogin();
+        $data_mennu = DB::table('datmon');
+        return view('profile_user.in4_prof_menu');
+    }
+
+
+
 }

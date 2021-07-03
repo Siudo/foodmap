@@ -9,7 +9,7 @@
 
         #floating-panel {
             position: absolute;
-            top: 270px;
+            top: 760px;
             left: 2%;
             z-index: 5;
             background-color: #fff;
@@ -30,6 +30,20 @@
         }
 
     </style>
+     <div class="slider-area">
+        <div class="slider-height2 d-flex align-items-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="hero-cap hero-cap2">
+                            <h2>BẢN ĐỒ QUÁN ĂN GẦN BẠN</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="about-low-area section-padding30">
         <div class="site-section ">
             <div class="container-fluid">
