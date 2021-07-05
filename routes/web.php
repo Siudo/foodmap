@@ -39,6 +39,7 @@ Route::post('/save-datban/{id_quan}', [DatBanController::class , 'add_datban']);
 Route::get('/profile', [DatBanController::class , 'index_profile']);
 Route::get('/profile-datban', [DatBanController::class , 'profile_datban']);
 Route::get('/profile-menu/{id_datban}', [DatBanController::class , 'profile_menu']);
+Route::post('/save-mon', [DatBanController::class , 'save_mon']);
 
 // USER login
 Route::get('/login-user', [LoginUserController::class , 'index']);
@@ -70,7 +71,7 @@ Route::post('/save-dish', [ThongTinQuanController::class , 'save_dish']);
 Route::get('/tatca-mon', [ThongTinQuanController::class , 'all_menu']);
 Route::get('/edit-mon/{id_thucdon}', [ThongTinQuanController::class , 'index_edit_dish']);
 Route::post('/update-dish/{id_thucdon}', [ThongTinQuanController::class , 'update_dish']);
-Route::post('/save-mon', [ThongTinQuanController::class , 'save_mon']);
+
 
 
 //Thong tin 

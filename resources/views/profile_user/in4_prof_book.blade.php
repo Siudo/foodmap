@@ -25,7 +25,7 @@
                                 <tbody>
                                     @foreach ($all_in4 as $key => $in4_res)
                                         <tr>
-                                            <th scope="row">{{ $in4_res->id_quan }}</th>
+                                            <th scope="row">{{ $in4_res->id_datban }}</th>
                                             <td>{{ $in4_res->tenquan }}</td>
                                             <td>{{ $in4_res->ngaygio }}</td>
                                             <td>{{ $in4_res->songuoi }}</td>
