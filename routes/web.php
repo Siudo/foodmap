@@ -65,12 +65,14 @@ Route::get('/tatca-loai-thucdon', [ThongTinQuanController::class , 'index_all_ca
 
 Route::get('/them-thucdon', [ThongTinQuanController::class , 'index_add_menu']);
 Route::post('/save-menu', [ThongTinQuanController::class , 'save_menu']);
+Route::get('/filter', [ThongTinQuanController::class , 'filter_menu']);
 
 Route::get('/them-mon', [ThongTinQuanController::class , 'index_add_dish']);
 Route::post('/save-dish', [ThongTinQuanController::class , 'save_dish']);
 Route::get('/tatca-mon', [ThongTinQuanController::class , 'all_menu']);
 Route::get('/edit-mon/{id_thucdon}', [ThongTinQuanController::class , 'index_edit_dish']);
 Route::post('/update-dish/{id_thucdon}', [ThongTinQuanController::class , 'update_dish']);
+Route::get('/menu-user-book/{id_datban}', [ThongTinQuanController::class , 'user_menu']);
 
 
 

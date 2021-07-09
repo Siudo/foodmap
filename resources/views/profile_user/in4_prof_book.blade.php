@@ -40,6 +40,7 @@
                                 </tbody>
 
                             </table>
+                            {{$all_in4->links('pagination.custom_paginate')}}
                             <?php
                             $message = Session::get('message');
                             if ($message) {

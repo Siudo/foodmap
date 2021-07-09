@@ -200,7 +200,7 @@ class ThongTinQuanController extends Controller
     {
         $this->AuthLogin();
         $admin_id = Session::get('admin_id');
-        $data_mes = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->join('khachhang','khachhang.id_khachhang','datban.id_khachhang')->where('quan.id_quanli',$admin_id)->orderBy('id_datban','DESC')->get();
+        $data_mes = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->join('khachhang','khachhang.id_khachhang','datban.id_khachhang')->where('quan.id_quanli',$admin_id)->orderBy('id_datban','DESC')->paginate(10);
         return view('admin_pages.detail_order')->with('data_mes',$data_mes);
     }
 
@@ -213,7 +213,15 @@ class ThongTinQuanController extends Controller
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $book_onday = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->where('ngaydat',date('Y-m-d'))->where('quan.id_quanli',$admin_id)->count();
         $ds_book = DB::table('datban')->join('khachhang','khachhang.id_khachhang','datban.id_khachhang')->join('quan','quan.id_quan','datban.id_quan')->where('ngaydat',date('Y-m-d'))->where('quan.id_quanli',$admin_id)->get();
-        return view('admin_pages.dashboard')->with('data_mes',$data_mes)->with('book_onday',$book_onday)->with('ds_book',$ds_book);
+        
+        $book_onmonth = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->whereMonth('ngaydat',date('m'))->whereYear('ngaydat',date('Y'))->where('quan.id_quanli',$admin_id)->count();
+        
+        $book_meal_onday = DB::table('datban')->join('datmon','datmon.id_datban','datban.id_datban')->join('quan','quan.id_quan','datban.id_quan')->whereMonth('ngaygio',date('m'))->whereYear('ngaygio',date('Y'))->where('quan.id_quanli',$admin_id)->sum('datmon.SL');
+        
+        $songuoi_onmonth = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->whereMonth('ngaygio',date('m'))->whereYear('ngaygio',date('Y'))->where('quan.id_quanli',$admin_id)->sum('datban.songuoi');
+        
+        $ds_book_onday = DB::table('datban')->join('khachhang','khachhang.id_khachhang','datban.id_khachhang')->join('quan','quan.id_quan','datban.id_quan')->where('ngaygio',date('Y-m-d'))->where('quan.id_quanli',$admin_id)->get();
+        return view('admin_pages.dashboard')->with('data_mes',$data_mes)->with('book_onday',$book_onday)->with('book_onmonth',$book_onmonth)->with('songuoi_onmonth',$songuoi_onmonth)->with('book_meal_onday',$book_meal_onday)->with('ds_book',$ds_book)->with('ds_book_onday',$ds_book_onday);
     }
 
     public function edit_location()
@@ -337,10 +345,26 @@ class ThongTinQuanController extends Controller
         $admin_id = Session::get('admin_id');
         $data_mes = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->join('khachhang','khachhang.id_khachhang','datban.id_khachhang')->where('quan.id_quanli',$admin_id)->orderBy('id_datban','DESC')->get();
         $id_quan = DB::table('quan')->where('id_quanli',$admin_id)->first()->id_quan;
-
-        $data_menu = DB::table('thucdon')->where('id_quan',$id_quan)->get();
-        return view('admin_pages.all_menu')->with('data_mes',$data_mes)->with('all_menu',$data_menu);
+        $data_loai = DB::table('loaithucdon')->get();
+       
+        $data_menu = DB::table('thucdon')->where('id_quan',$id_quan)->paginate(10);
+        return view('admin_pages.all_menu')->with('data_mes',$data_mes)->with('all_menu',$data_menu)->with('cate_menu',$data_loai)->with('t_id_loaitd','null');
     }
+
+    public function filter_menu(Request $request)
+    {
+        $this->AuthLogin();
+        $admin_id = Session::get('admin_id');
+        $data_mes = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->join('khachhang','khachhang.id_khachhang','datban.id_khachhang')->where('quan.id_quanli',$admin_id)->orderBy('id_datban','DESC')->get();
+        $id_quan = DB::table('quan')->where('id_quanli',$admin_id)->first()->id_quan;
+        
+        $data_loai = DB::table('loaithucdon')->get();
+        $id_loaitd = $request->cate_menu;
+        $data_menu = DB::table('thucdon')->where('id_quan',$id_quan)->where('id_loaitd',$id_loaitd)->paginate(10);
+        return view('admin_pages.all_menu')->with('data_mes',$data_mes)->with('all_menu',$data_menu)->with('cate_menu',$data_loai)->with('t_id_loaitd',$id_loaitd);
+    }
+
+
 
     public function index_edit_dish($id_thucdon)
     {
@@ -374,7 +398,15 @@ class ThongTinQuanController extends Controller
         return redirect('/tatca-mon');
     }
 
-   
+    public function user_menu($id_datban)
+    {
+        $this->AuthLogin();
+        $admin_id = Session::get('admin_id');
+        $data_mes = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->join('khachhang','khachhang.id_khachhang','datban.id_khachhang')->where('quan.id_quanli',$admin_id)->orderBy('id_datban','DESC')->get();
+
+        $data_menu = DB::table('datmon')->join('thucdon','thucdon.id_thucdon','datmon.id_thucdon')->where('datmon.id_datban',$id_datban)->paginate(10);
+        return view('admin_pages.menu_user_order')->with('data_mes',$data_mes)->with('data_menu',$data_menu);
+    }
 
 
 }

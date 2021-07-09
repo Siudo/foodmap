@@ -193,14 +193,14 @@ class DatBanController extends Controller
         $id_tk = Session::get("id_user");
         $id_kh = DB::table('khachhang')->where('id_tkkh',$id_tk)->first()->id_khachhang;
 
-        $data_book = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->where('id_khachhang',$id_kh)->get();
+        $data_book = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->where('id_khachhang',$id_kh)->orderBy('id_datban','desc')->paginate(10);
         return view('profile_user.in4_prof_book')->with('all_in4',$data_book);
     }
 
     public function profile_menu($id_datban)
     {
         $this->authlogin();
-        $data_menu = DB::table('datmon')->join('thucdon','thucdon.id_thucdon','datmon.id_thucdon')->where('datmon.id_datban',$id_datban)->get();
+        $data_menu = DB::table('datmon')->join('thucdon','thucdon.id_thucdon','datmon.id_thucdon')->where('datmon.id_datban',$id_datban)->paginate(10);
         return view('profile_user.in4_prof_menu')->with('data_menu',$data_menu);
     }
 

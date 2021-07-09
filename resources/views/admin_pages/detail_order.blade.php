@@ -40,7 +40,9 @@
                                                 <a href="{{ URL::to('/edit-book/'.$values->id_datban ) }}"><i
                                                         class="fas fa-pen-square" style="font-size:25px"></i></a>
                                                 <a href="{{ URL::to('/xacnhan/'.$values->id_datban ) }}"><i class="fas fa-check-circle" style="font-size:25px"></i></a>
-
+                                                
+                                                <a href="{{ URL::to('/menu-user-book/' . $values->id_datban) }}"><i class="far fa-folder-open" style="font-size: 25px"></i></a>
+                                                
                                             </td>
 
                                         </tr>
@@ -50,6 +52,7 @@
                                 </tbody>
 
                             </table>
+                            {{$data_mes->links('pagination.custom_paginate')}}
                             <?php
                             $message = Session::get('message');
                             if ($message) {

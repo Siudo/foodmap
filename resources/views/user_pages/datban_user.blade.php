@@ -143,7 +143,7 @@
                                                     <div class="menu-item-name"><input class="primary-checkbox" name="chon_mon[]" value="{{ $value_menu->id_thucdon }}"
                                                         type="checkbox" id="default-checkbox"> {{ $value_menu->tenmon }}</div>
                                                     <div class="menu-item-price"> {{ $value_menu->gia }} </div>
-                                                    <div class="menu-item-description">Số lượng :  <input type="number" name="soluong[]"  style="width: 10%"> </div>
+                                                    <div class="menu-item-description">Số lượng :  <input type="number" name="soluong[]" min="0" style="width: 10%"> </div>
                                                     <div class="menu-item-description"> {{ $value_menu->loaimon }} </div>
                                                 </div>
 

@@ -46,6 +46,7 @@
                                 </tbody>
 
                             </table>
+                            {{$data_menu->links('pagination.custom_paginate')}}
                             <?php
                             $message = Session::get('message');
                             if ($message) {

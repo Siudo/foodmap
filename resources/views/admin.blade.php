@@ -176,9 +176,10 @@
                                 <h6 class='py-2 px-4'>Thông báo</h6>
                                 <div class="dropdown-divider"></div>
                                 <ul class="list-group rounded-none">
+                                    @foreach ($data_mes as $key => $values)
+                                    @if ($values->trangthai_book)
                                     <li class="list-group-item border-0 align-items-start">
-                                        @foreach ($data_mes as $key => $values)
-                                        @if ($values->trangthai_book)
+                                     
                                         <div class="avatar bg-success mr-3">
                                             <span class="avatar-content"><i data-feather="shopping-cart"></i></span>
                                         </div>
@@ -199,14 +200,15 @@
                                         <div class="dropdown-divider"></div>
                                    
                                             
-                                        @else
-                                       
-                                   
-                                        @endif
-                                        
-                                        @endforeach
+                                    
                                         
                                     </li>
+                                    @else
+                                       
+                                   
+                                    @endif
+                                    
+                                    @endforeach
                                 </ul>
                             </div>
                         </li>
