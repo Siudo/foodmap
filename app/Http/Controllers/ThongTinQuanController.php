@@ -302,7 +302,8 @@ class ThongTinQuanController extends Controller
         $admin_id = Session::get('admin_id');
         $id_quan = DB::table('quan')->where('id_quanli',$admin_id)->first()->id_quan;
         Session::put('id_quan',$id_quan);
-        $path = $request->file('exc_menu')->getRealPath();
+        $path1 = $request->file('exc_menu')->store('temp');
+        $path = storage_path('app').'/'.$path1;
         Excel::import(new ThucDonImports, $path);
         return back();
 
@@ -409,4 +410,6 @@ class ThongTinQuanController extends Controller
     }
 
 
+
+   
 }

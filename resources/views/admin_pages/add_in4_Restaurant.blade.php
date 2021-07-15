@@ -13,6 +13,7 @@
                             <div class="form-body">
                                 <form action="{{ URL::to('/save-in4') }}" method="post" enctype="multipart/form-data">
                                     {{ csrf_field() }}
+                
                                     <div class="form-group row">
                                         <label for="inputEmail3" class="col-sm-2 col-form-label">Tên quán</label>
                                         <div class="col-sm-10">

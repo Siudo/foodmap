@@ -45,6 +45,13 @@ Route::post('/save-mon', [DatBanController::class , 'save_mon']);
 Route::get('/login-user', [LoginUserController::class , 'index']);
 Route::get('/logout', [LoginUserController::class , 'logout_account']);
 Route::post('/login-account', [LoginUserController::class , 'login_account']);
+Route::get('/forgot-password-user', [LoginUserController::class , 'index_forgot_password']);
+Route::post('/check-account', [LoginUserController::class , 'check_account']);
+Route::get('/confirm-code-user', [LoginUserController::class , 'index_confirm_code']);
+Route::post('/check-code-xn', [LoginUserController::class , 'check_confirm_code']);
+Route::get('/change-password-user', [LoginUserController::class , 'index_change_password']);
+Route::post('/update-account', [LoginUserController::class , 'update_password']);
+
 
 //USER register
 Route::get('/register-user', [RegisterUserController::class , 'index']);
@@ -99,13 +106,13 @@ Route::get('/delete-cate-res/{id_loai}', [LoaiQuanController::class , 'delete_ca
 //Login Admin
 
 Route::get('/login-admin', [LoginAdminController::class , 'index_login']);
-
+Route::get('/forgot-password-admin', [LoginAdminController::class , 'index_forgot_admin']);
 Route::post('/check-login', [LoginAdminController::class , 'check_login']);
-
+Route::post('/check-account-admin', [LoginAdminController::class , 'check_account_admin']);
 Route::get('/logout-admin', [LoginAdminController::class , 'logout_admin']);
-
-
-
-
+Route::get('/confirm-code-admin', [LoginAdminController::class , 'confirm_code_admin']);
+Route::post('/check-code-admin', [LoginAdminController::class , 'check_code_admin']);
+Route::get('/change-password-admin', [LoginAdminController::class , 'change_password_admin']);
+Route::post('/update-password-admin', [LoginAdminController::class , 'update_password_admin']);
 //Ban
 Route::get('/them-ban', [tableController::class , 'index_add_table']);
