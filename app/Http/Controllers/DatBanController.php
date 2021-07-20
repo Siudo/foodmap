@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Redirect;
 session_start();
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class DatBanController extends Controller
 {
@@ -103,8 +104,7 @@ class DatBanController extends Controller
           
                         });
 
-                        Session::put("thanhcong","Đã đặt bàn thành công");
-                        return redirect("/datban/".$id_quan);
+                        return redirect("/profile-menu/".$id_datban);
                      
                     }
                 }
@@ -146,8 +146,7 @@ class DatBanController extends Controller
           
                     });
                     
-                    Session::put("thanhcong","Đã đặt bàn thành công");
-                    return redirect("/datban/".$id_quan);
+                    return redirect("/profile-menu/".$id_datban);
                    
                     
                 }
@@ -194,7 +193,11 @@ class DatBanController extends Controller
         $id_kh = DB::table('khachhang')->where('id_tkkh',$id_tk)->first()->id_khachhang;
 
         $data_book = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->where('id_khachhang',$id_kh)->orderBy('id_datban','desc')->paginate(10);
-        return view('profile_user.in4_prof_book')->with('all_in4',$data_book);
+        $data_payment = DB::table('payment')->join('datban','datban.id_datban','payment.id_datban')->get();
+        // echo '<pre>';
+        // print_r($data_payment);
+        // echo '</pre>';
+       return view('profile_user.in4_prof_book')->with('all_in4',$data_book)->with('data_payment',$data_payment);
     }
 
     public function profile_menu($id_datban)
@@ -205,5 +208,86 @@ class DatBanController extends Controller
     }
 
 
+    //payments 
+    public function index_payment(Request $request, $id_datban)
+    {
+        $this->authlogin();
+        $data = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->where('datban.id_datban',$id_datban)->get();
+        $tong = array();
+        $tong = Session::get('TongTT');
+        Session::put('id_db', $id_datban);
+        Session::put('TongTT',null);
+        return view('vnpay.index_vnpay')->with('data_payment',$data)->with('TongTT',$tong);
+    }
+
+    public function enter_payment(Request $request)
+    {
+        $vnp_TxnRef = Str::random(15); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
+        $vnp_OrderInfo = $request->order_desc;
+        $vnp_OrderType = $request->order_type;
+        $vnp_Amount = $request->amount * 100;
+        $vnp_Locale = $request->language;
+        $vnp_BankCode = $request->bank_code;
+        $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
+
+        $inputData = array(     
+            "vnp_Version" => "2.0.0",
+            "vnp_TmnCode" => env('VNP_TMN_CODE'),
+            "vnp_Amount" => $vnp_Amount,
+            "vnp_Command" => "pay",
+            "vnp_CreateDate" => date('YmdHis'),
+            "vnp_CurrCode" => "VND",
+            "vnp_IpAddr" => $vnp_IpAddr,
+            "vnp_Locale" => $vnp_Locale,
+            "vnp_OrderInfo" => $vnp_OrderInfo,
+            "vnp_OrderType" => $vnp_OrderType,
+            "vnp_ReturnUrl" => route('vnp.return'), 
+            "vnp_TxnRef" => $vnp_TxnRef,
+        );
+
+        if (isset($vnp_BankCode) && $vnp_BankCode != "") {
+           $inputData['vnp_BankCode'] = $vnp_BankCode;
+        }
+        ksort($inputData);
+        $query = "";
+        $i = 0;
+        $hashdata = "";
+        foreach ($inputData as $key => $value) {
+           if ($i == 1) {
+               $hashdata .= '&' . $key . "=" . $value;
+           } else {
+               $hashdata .= $key . "=" . $value;
+               $i = 1;
+           }
+           $query .= urlencode($key) . "=" . urlencode($value) . '&';
+        }
+
+        $vnp_Url = env('VNP_URL') . "?" . $query;
+        if (env('VNP_HASH_SECRET')) {
+           // $vnpSecureHash = md5($vnp_HashSecret . $hashdata);
+         	$vnpSecureHash = hash('sha256', env('VNP_HASH_SECRET') . $hashdata);
+            $vnp_Url .= 'vnp_SecureHashType=SHA256&vnp_SecureHash=' . $vnpSecureHash;
+        }
+        return redirect($vnp_Url);
+    }
+
+    /// INSERT vào payment
+    public function vnp_return(Request $request)
+    {
+       $vnp_data = $request->all();
+      // dd($request->all());
+      $data_payments = array();
+      $data_payments['id_datban'] =  Session::get('id_db');
+      $data_payments['transaction_code'] =  $vnp_data['vnp_TxnRef'];
+      $data_payments['money'] =  $vnp_data['vnp_Amount'] / 100;
+      $data_payments['note'] = $vnp_data['vnp_OrderInfo'];
+      $data_payments['vnp_response_code'] = $vnp_data['vnp_ResponseCode'];
+      $data_payments['code_vnpay'] = $vnp_data['vnp_TransactionNo'];
+      $data_payments['code_bank'] = $vnp_data['vnp_BankCode'];
+      $data_payments['time'] = date('Y-m-d H:i',strtotime($vnp_data['vnp_PayDate']));
+      //dd($data_payments);
+      DB::table('payment')->insert($data_payments);
+      return redirect('/profile-datban');
+    }
 
 }

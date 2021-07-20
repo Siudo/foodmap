@@ -82,6 +82,12 @@ Route::post('/update-dish/{id_thucdon}', [ThongTinQuanController::class , 'updat
 Route::get('/menu-user-book/{id_datban}', [ThongTinQuanController::class , 'user_menu']);
 
 
+//payments
+Route::get('/thanh-toan-hd/{id_datban}', [DatBanController::class , 'index_payment']);
+Route::post('/enter-payment', [DatBanController::class , 'enter_payment']);
+Route::get('/vnp-return', [DatBanController::class , 'vnp_return'])->name('vnp.return');
+
+
 
 //Thong tin 
 Route::get('/them-thong-tin-quan', [ThongTinQuanController::class , 'index_add_in4']);
@@ -93,6 +99,8 @@ Route::get('/delete-in4-res/{id_quan}', [ThongTinQuanController::class , 'delete
 Route::get('/chitiet-datban', [ThongTinQuanController::class , 'detail_order']);
 Route::get('/xacnhan/{id_datban}', [ThongTinQuanController::class , 'xacnhan_detail_order']);
 Route::get('/dashboard', [ThongTinQuanController::class , 'dashboard']);
+
+
 //Loai quan
 Route::get('/them-loai-quan', [LoaiQuanController::class , 'index_add_cate']);
 Route::post('/save-cate-res', [LoaiQuanController::class , 'save_cate_res']);
@@ -104,7 +112,6 @@ Route::get('/delete-cate-res/{id_loai}', [LoaiQuanController::class , 'delete_ca
 
 
 //Login Admin
-
 Route::get('/login-admin', [LoginAdminController::class , 'index_login']);
 Route::get('/forgot-password-admin', [LoginAdminController::class , 'index_forgot_admin']);
 Route::post('/check-login', [LoginAdminController::class , 'check_login']);
@@ -114,5 +121,8 @@ Route::get('/confirm-code-admin', [LoginAdminController::class , 'confirm_code_a
 Route::post('/check-code-admin', [LoginAdminController::class , 'check_code_admin']);
 Route::get('/change-password-admin', [LoginAdminController::class , 'change_password_admin']);
 Route::post('/update-password-admin', [LoginAdminController::class , 'update_password_admin']);
+
+
+
 //Ban
 Route::get('/them-ban', [tableController::class , 'index_add_table']);

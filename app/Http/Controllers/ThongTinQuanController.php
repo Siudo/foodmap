@@ -201,7 +201,8 @@ class ThongTinQuanController extends Controller
         $this->AuthLogin();
         $admin_id = Session::get('admin_id');
         $data_mes = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->join('khachhang','khachhang.id_khachhang','datban.id_khachhang')->where('quan.id_quanli',$admin_id)->orderBy('id_datban','DESC')->paginate(10);
-        return view('admin_pages.detail_order')->with('data_mes',$data_mes);
+        $data_payment = DB::table('payment')->join('datban','datban.id_datban','payment.id_datban')->get();
+        return view('admin_pages.detail_order')->with('data_mes',$data_mes)->with('data_payment',$data_payment);
     }
 
 
@@ -216,12 +217,12 @@ class ThongTinQuanController extends Controller
         
         $book_onmonth = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->whereMonth('ngaydat',date('m'))->whereYear('ngaydat',date('Y'))->where('quan.id_quanli',$admin_id)->count();
         
-        $book_meal_onday = DB::table('datban')->join('datmon','datmon.id_datban','datban.id_datban')->join('quan','quan.id_quan','datban.id_quan')->whereMonth('ngaygio',date('m'))->whereYear('ngaygio',date('Y'))->where('quan.id_quanli',$admin_id)->sum('datmon.SL');
-        
-        $songuoi_onmonth = DB::table('datban')->join('quan','quan.id_quan','datban.id_quan')->whereMonth('ngaygio',date('m'))->whereYear('ngaygio',date('Y'))->where('quan.id_quanli',$admin_id)->sum('datban.songuoi');
+        $doanhthu_onmonth = DB::table('payment')->join('datban','payment.id_datban','payment.id_datban')->join('quan','quan.id_quan','datban.id_quan')->select('payment.id_datban','payment.money')->groupby('payment.id_datban','payment.money')->whereMonth('payment.time',date('m'))->whereYear('payment.time',date('Y'))->where('quan.id_quanli',$admin_id)->get();
+    
+        $doanhthu_onyear = DB::table('payment')->join('datban','payment.id_datban','payment.id_datban')->join('quan','quan.id_quan','datban.id_quan')->select('payment.id_datban','payment.money')->groupby('payment.id_datban','payment.money')->whereYear('payment.time',date('Y'))->where('quan.id_quanli',$admin_id)->get();
         
         $ds_book_onday = DB::table('datban')->join('khachhang','khachhang.id_khachhang','datban.id_khachhang')->join('quan','quan.id_quan','datban.id_quan')->where('ngaygio',date('Y-m-d'))->where('quan.id_quanli',$admin_id)->get();
-        return view('admin_pages.dashboard')->with('data_mes',$data_mes)->with('book_onday',$book_onday)->with('book_onmonth',$book_onmonth)->with('songuoi_onmonth',$songuoi_onmonth)->with('book_meal_onday',$book_meal_onday)->with('ds_book',$ds_book)->with('ds_book_onday',$ds_book_onday);
+        return view('admin_pages.dashboard')->with('data_mes',$data_mes)->with('book_onday',$book_onday)->with('book_onmonth',$book_onmonth)->with('payment_onyear',$doanhthu_onyear)->with('payment_onmonth',$doanhthu_onmonth)->with('ds_book',$ds_book)->with('ds_book_onday',$ds_book_onday);
     }
 
     public function edit_location()
@@ -294,9 +295,7 @@ class ThongTinQuanController extends Controller
 
     public function save_menu(Request $request)
     {
-        // $this->validate($request,[
-        //     'exc_menu' => 'require|mimes:xls,xlsx'
-        // ]);
+        
         $id_loaitd = $request->cate_menu;
         Session::put('id_loaitd',$id_loaitd);
         $admin_id = Session::get('admin_id');
@@ -410,6 +409,7 @@ class ThongTinQuanController extends Controller
     }
 
 
+    
 
    
 }

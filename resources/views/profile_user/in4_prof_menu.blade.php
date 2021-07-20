@@ -18,11 +18,14 @@
                                         <th scope="col">Loại món</th>
                                         <th scope="col">Số lượng</th>
                                         <th scope="col">Giá</th>
-                                        <th scope="col">Tuỳ chọn</th>
+                                        
 
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php
+                                        $total = 0;
+                                    @endphp
                                     @foreach ($data_menu as $key => $in4_menu)
                                         <tr>
                                             <th scope="row">{{ $in4_menu->id_datmon }}</th>
@@ -32,20 +35,32 @@
                                             @php
                                                $gia = $in4_menu->gia;
                                                 $sl =  $in4_menu->SL;
-                                                $tong = $gia*$sl;
+                                                $tong_mon = $gia*$sl;
+                                                
+                                                $total = (float)$total + (float)$tong_mon;
                                             @endphp
-                                            <td>{{ number_format($tong) }}</td>
+                                            <td>{{ number_format($tong_mon) }}</td>
                                            
                                            
-                                            <td>
-                                                <a href="{{ URL::to('/profile-menu/' . $in4_menu->id_datmon) }}"><i class="far fa-folder-open" style="font-size: 25px"></i> Xem</a>
-                                            </td>
+                                           
 
                                         </tr>
                                     @endforeach
                                 </tbody>
+                               
 
                             </table>
+                            <div style="margin-left:80rem">
+                                <h4 class="card-title">TỔNG: {{ number_format($total)}} </h4>
+                                @php
+                                    Session::put('TongTT', $total);
+                                @endphp
+                            </div>
+                                <div style="margin-left:80rem">
+                                    <a href="{{ URL::to('/thanh-toan-hd/' . $in4_menu->id_datban) }}" class="btn btn-primary">Thanh Toán</a>
+                                </div>
+                         
+                            
                             {{$data_menu->links('pagination.custom_paginate')}}
                             <?php
                             $message = Session::get('message');

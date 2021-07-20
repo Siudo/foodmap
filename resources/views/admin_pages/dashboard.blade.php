@@ -45,9 +45,15 @@
                     <div class="card-body p-0">
                         <div class="d-flex flex-column">
                             <div class='px-3 py-3 d-flex justify-content-between'>
-                                <h3 class='card-title'>Số món đặt trong ngày</h3>
+                                <h3 class='card-title'>Doanh thu trong tháng</h3>
                                 <div class="card-right d-flex align-items-center">
-                                    <p>{{$book_meal_onday}} </p>
+                                    @php
+                                    $total = 0;
+                                        foreach ($payment_onmonth as $key => $values) {
+                                            $total = $total + $values->money;
+                                        }
+                                    @endphp
+                                    <p>{{$total}} </p>
                                 </div>
                             </div>
                             <div class="chart-wrapper">
@@ -64,7 +70,13 @@
                             <div class='px-3 py-3 d-flex justify-content-between'>
                                 <h3 class='card-title'>Số người đã ăn tại quán trong tháng</h3>
                                 <div class="card-right d-flex align-items-center">
-                                    <p>{{$songuoi_onmonth}}</p>
+                                    @php
+                                    $total_year = 0;
+                                        foreach ($payment_onyear as $key => $values1) {
+                                            $total_year = $total_year + $values1->money;
+                                        }
+                                    @endphp
+                                    <p>{{$total_year}}</p>
                                 </div>
                             </div>
                             <div class="chart-wrapper">
