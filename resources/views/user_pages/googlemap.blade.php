@@ -23,14 +23,19 @@
             border-radius: 20px;
         }
 
-        .btn_pt{
+        .btn_pt {
             border: none;
             background: transparent;
             cursor: pointer;
         }
 
+        .location-t {
+            display: flex;
+
+        }
+
     </style>
-     <div class="slider-area">
+    <div class="slider-area">
         <div class="slider-height2 d-flex align-items-center">
             <div class="container">
                 <div class="row">
@@ -56,11 +61,13 @@
                     <div class="row" id="mode-selector">
 
                         <div class="col">
-                            <button class="btn_pt" id="changemode-walking" style="color: black; font-size:25px;"><i class="fas fa-car-alt"></i></button>
+                            <button class="btn_pt" id="changemode-walking" style="color: black; font-size:25px;"><i
+                                    class="fas fa-car-alt"></i></button>
 
                         </div>
                         <div class="col">
-                            <button class="btn_pt" id="changemode-transit" style="color: black; font-size:25px;"><i class="fas fa-bus"></i></button>
+                            <button class="btn_pt" id="changemode-transit" style="color: black; font-size:25px;"><i
+                                    class="fas fa-bus"></i></button>
                         </div>
                         <div class="col">
                             <button class="btn_pt" id="changemode-driving" style="color: black; font-size:25px;"><i
@@ -68,9 +75,10 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col">
-                            <input type="text"  id="org_input" placeholder="Địa chỉ của bạn"
-                                class="single-input">
+                        <div class="col location-t">
+                            <input type="text" id="org_input" placeholder="Địa chỉ của bạn" class="single-input">
+                            <button class="border-btn header-btn" id="btn-location" style=" border: none; width: 10%;"><i
+                                    class="fas fa-map-marker-alt" style="font-size: 20px;text-align: center;"></i></button>
                         </div>
                     </div>
                     <br>
@@ -143,7 +151,7 @@
             };
 
 
-            //multi marker
+            //////// multi marker ////////////
 
             var locations = [
                 @foreach ($data_marker as $key => $value)
@@ -180,50 +188,97 @@
                 })(marker1, i));
             }
 
+            //////////// CURRENT Location /////////////////////////
+
+            document.getElementById("btn-location").addEventListener("click", () => {
+                var infoWindow = new google.maps.InfoWindow();
+                // current location
+                var locate;
+                map.controls[google.maps.ControlPosition.TOP_CENTER].push(locate);
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        (position) => {
+                            const pos = {
+                                lat: position.coords.latitude,
+                                lng: position.coords.longitude,
+                                //  lat: 10.8452971,
+                                // lng: 106.7950824,
+                            };
+                            infoWindow.setPosition(pos);
+                            var marker = new google.maps.Marker({
+                                map: map,
+                                position: pos,
+                            });
+                            marker.addListener('click', function() {
+                                infoWindow.setContent("lat and lng : " + pos.lat + "------" + pos.lng);
+                                infoWindow.open(map, marker);
+                            });
+                            document.getElementById('lat_user').value = pos.lat;
+                            document.getElementById('lng_user').value = pos.lng;
+                            map.setCenter(pos);
+                        },
+                        () => {
+                            handleLocationError(true, infoWindow, map.getCenter());
+                        }
+                    );
+                } else {
+                    handleLocationError(false, infoWindow, map.getCenter());
+                }
+            });
+
+            // var marker = new google.maps.Marker({
+            //     map: map
+            // });
+            // var inforWindow = new google.maps.InfoWindow();
+            // marker.setVisible(false);
+
+            // var searchBox = document.getElementById("org_input");
+            // var autocomplete = new google.maps.places.Autocomplete(searchBox);
+            // autocomplete.bindTo('bounds', map);
+
+            // autocomplete.addListener('place_changed', () => {
+            //     inforWindow.close();
+            //     var place = autocomplete.getPlace();
+            //     if (!place.geometry || !place.geometry.location) {
+            //         return;
+
+            //     }
+            //     if (place.geometry.viewpoint) {
+            //         map.fitBounds(place.geometry.viewpoint);
+
+            //     } else {
+            //         map.setCenter(place.geometry.location);
+            //         map.setZoom(15);
+            //     }
+            //     marker.setPlace({
+            //         placeId: place.place_id,
+            //         location: place.geometry.location,
+            //     });
+            //     marker.setVisible(true);
+
+            //     var address = '';
+            //     if (place.address_components) {
+            //         address = [
+            //             (place.address_components[0] && place.address_components[0].short_name || ''),
+            //             (place.address_components[1] && place.address_components[1].short_name || ''),
+            //             (place.address_components[2] && place.address_components[2].short_name || '')
+            //         ].join(' ');
+            //     }
+            //     document.getElementById('lat_res').value = place.geometry.location.lat();
+            //     document.getElementById('lng_res').value = place.geometry.location.lng();
+            //     inforWindow.setContent('<div><strong style="font-weight: bold">' + place.name + '</strong><br>' +
+            //         address);
+            //     inforWindow.open(map, marker);
+
+            // });
 
 
 
 
-            var infoWindow = new google.maps.InfoWindow();
-            // current location
-            var locate;
-            map.controls[google.maps.ControlPosition.TOP_CENTER].push(locate);
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        const pos = {
-                            // lat: position.coords.latitude,
-                            // lng: position.coords.longitude,
-                             lat: 10.8452971,
-                            lng: 106.7950824,
-                        };
-                        infoWindow.setPosition(pos);
-                        var marker = new google.maps.Marker({
-                            map: map,
-                            position: pos,
-                        });
-                        marker.addListener('click', function() {
-                            infoWindow.setContent("lat and lng : " + pos.lat + "------" + pos.lng);
-                            infoWindow.open(map, marker);
-                        });
-                        document.getElementById('lat_user').value = pos.lat;
-                        document.getElementById('lng_user').value = pos.lng;
-                        map.setCenter(pos);
-                    },
-                    () => {
-                        handleLocationError(true, infoWindow, map.getCenter());
-                    }
-                );
-            } else {
-                handleLocationError(false, infoWindow, map.getCenter());
-            }
-
-           
-           // new AutocompleteDirectionsHandler(map);
 
 
-            
-           // Direction
+
+            // Direction
             const directionsService = new google.maps.DirectionsService();
             const directionsRenderer = new google.maps.DirectionsRenderer({
                 suppressMarkers: true
@@ -251,7 +306,7 @@
                         lat: parseFloat(document.getElementById('lat_res').value),
                         lng: parseFloat(document.getElementById('lng_res').value),
                     },
-                    travelMode: google.maps.TravelMode.WALKING,
+                    travelMode: google.maps.TravelMode.DRIVING,
                 },
                 (response, status) => {
                     if (status == "OK") {
@@ -271,103 +326,6 @@
         }
 
 
-        ///////////////    AUTO COMPLETE & DIRECTIONS  ////////////////////////////////////
-        // class AutocompleteDirectionsHandler {
-        //     constructor(map) {
-        //         this.map = map;
-        //         this.originPlaceId = "";
-        //         this.destinationPlaceId = "";
-        //         this.travelMode = google.maps.TravelMode.WALKING;
-        //         this.directionsService = new google.maps.DirectionsService();
-        //         this.directionsRenderer = new google.maps.DirectionsRenderer();
-        //         this.directionsRenderer.setMap(map);
-        //         const originInput = document.getElementById("org_input");
-        //         const destinationInput = document.getElementById("des_input");
-        //         const modeSelector = document.getElementById("mode-selector");
-        //         const originAutocomplete = new google.maps.places.Autocomplete(originInput);
-        //         // Specify just the place data fields that you need.
-        //         originAutocomplete.setFields(["place_id"]);
-        //         const destinationAutocomplete = new google.maps.places.Autocomplete(
-        //             destinationInput
-        //         );
-        //         // Specify just the place data fields that you need.
-        //         destinationAutocomplete.setFields(["place_id"]);
-        //         this.setupClickListener(
-        //             "changemode-walking",
-        //             google.maps.TravelMode.WALKING
-        //         );
-        //         this.setupClickListener(
-        //             "changemode-transit",
-        //             google.maps.TravelMode.TRANSIT
-        //         );
-        //         this.setupClickListener(
-        //             "changemode-driving",
-        //             google.maps.TravelMode.DRIVING
-        //         );
-        //         this.setupPlaceChangedListener(originAutocomplete, "ORIG");
-        //         this.setupPlaceChangedListener(destinationAutocomplete, "DEST");
-        //         this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(originInput);
-        //         this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(destinationInput);
-        //         this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(modeSelector);
-        //     }
-        //     // Sets a listener on a radio button to change the filter type on Places
-        //     // Autocomplete.
-        //     setupClickListener(id, mode) {
-        //         const radioButton = document.getElementById(id);
-        //         radioButton.addEventListener("click", () => {
-        //             this.travelMode = mode;
-        //             this.route();
-        //         });
-        //     }
-        //     setupPlaceChangedListener(autocomplete, mode) {
-        //         autocomplete.bindTo("bounds", this.map);
-        //         autocomplete.addListener("place_changed", () => {
-        //             const place = autocomplete.getPlace();
-
-        //             if (!place.place_id) {
-        //                 window.alert("Please select an option from the dropdown list.");
-        //                 return;
-        //             }   
-
-        //             if (mode === "ORIG") {
-        //                 this.originPlaceId = place.place_id;
-        //             } else {
-        //                 this.destinationPlaceId = place.place_id;
-        //             }
-        //             this.route();
-        //         });
-        //     }
-        //     route() {
-        //         if (!this.originPlaceId || !this.destinationPlaceId) {
-        //             return;
-        //         }
-        //         const me = this;
-        //         this.directionsService.route({
-        //                 origin: {
-        //                     placeId: this.originPlaceId
-        //                 },
-        //                 destination: {
-        //                     placeId: this.destinationPlaceId
-        //                 },
-        //                 travelMode: this.travelMode,
-        //             },
-        //             (response, status) => {
-        //                 if (status === "OK") {
-        //                     me.directionsRenderer.setDirections(response);
-        //                 } else {
-        //                     window.alert("Directions request failed due to " + status);
-        //                 }
-        //             }
-        //         );
-        //     }
-        // }
-
-
-
-
-
-
-
 
         function handleLocationError(browserHasGeolocation, infoWindow, pos) {
             infoWindow.setPosition(pos);
@@ -375,7 +333,6 @@
                 "Lỗi : Trình duyệt không hỗ trợ Geolocation.");
             infoWindow.open(map);
         }
-
     </script>
 
 @endsection

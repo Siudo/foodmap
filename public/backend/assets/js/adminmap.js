@@ -8,6 +8,7 @@ function createMap() {
         zoom: 15,
         center: myLatLng,
     });
+
     var marker = new google.maps.Marker({ map: map });
     var inforWindow = new google.maps.InfoWindow();
     marker.setVisible(false);
@@ -51,5 +52,7 @@ function createMap() {
         inforWindow.open(map, marker);
 
     });
+
+
 
 }

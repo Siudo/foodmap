@@ -63,17 +63,10 @@
                                     <nav>
                                         <ul id="navigation">
                                             <li><a href="{{ URL::to('/') }}">Trang chủ</a></li>
-                                            <li><a href="{{ URL::to('/gmap') }}">Bản đồ</a></li>
-                                            <li><a href="about.html">About</a></li>
-                                            <li><a href="menu.html">Menu</a></li>
-                                            <li><a href="blog.html">Blog</a>
-                                                <ul class="submenu">
-                                                    <li><a href="blog.html">Blog</a></li>
-                                                    <li><a href="blog_details.html">Blog Details</a></li>
-                                                    <li><a href="elements.html">Element</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="contact.html">Contact</a></li>
+                                            <li><a href="{{ URL::to('/gmap') }}">Tìm quán ăn</a></li>
+                                          
+                                            
+                                            <li><a href="{{URL::to('/login-admin')}}">Admin</a></li>
                                             @if (Session::get('id_user') == null)
                                                 <li>
                                                     <a href="{{ URL::to('/login-user') }}">Đăng Nhập</a>
