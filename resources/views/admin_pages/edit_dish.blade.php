@@ -5,7 +5,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Sửa thông tin quán</h4>
+                        <h4 class="card-title">Sửa thông tin món ăn</h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">

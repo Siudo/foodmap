@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login User</title>
+    <title>Register User</title>
     <link rel="stylesheet" href="{{ asset('public/frontend/assets/css/all.css') }}">
     <link rel="stylesheet" href="{{ asset('public/frontend/assets/css/logincss.css') }}">
     <link rel="shortcut icon" href="{{ asset('public/frontend/assets/img/logo/logofood.png') }}" type="image/x-icon">
@@ -32,7 +32,7 @@
                     
                 @endif
                 
-                <input type="submit" value="Sign in" class="btn1">
+                <input type="submit" value="Sign up" class="btn1">
             </form>
             <a href="{{ URL::to('/login-user') }}" class="dnthave" style="left: 30%">   Have an account? Login</a>
         </div>

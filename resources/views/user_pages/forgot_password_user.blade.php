@@ -17,15 +17,21 @@
             <span class="error animated tada" id="msg"></span>
             <form action="{{ URL::to('/check-account') }}" class="box" method="post" onsubmit="return checkStuff()">
                 {{ csrf_field() }}
-                
+
                 <h4>Quên<span> Mật khẩu</span></h4>
                 <h5>Nhập thông tin của bạn</h5>
                 <input type="text" name="tentk_user" placeholder="Tên tài khoản" autocomplete="off">
-                
-              
+
+
                 <input type="submit" value="Xác nhận" class="btn1">
             </form>
-           
+            <?php
+            $message = Session::get('message');
+            if ($message) {
+                echo '<span style="color:red">' . $message . '</span>';
+                Session::put('message', null);
+            }
+            ?>
         </div>
 
     </div>

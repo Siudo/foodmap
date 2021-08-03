@@ -16,13 +16,22 @@
         <div class="container">
             <span class="error animated tada" id="msg"></span>
             <form action="{{ URL::to('/login-account') }}" class="box" method="post" onsubmit="return checkStuff()">
-                {{ csrf_field() }}
+               
                 
+                {{ csrf_field() }}
+                <?php
+                $message = Session::get('message');
+                if ($message) {
+                echo '<span style="color:red">' . $message . '</span>';
+                Session::put('message', null);
+                }
+                ?>
                 <h4>User<span> Login</span></h4>
                 <h5>Sign in to your account.</h5>
                 <input type="text" name="tentk_user" placeholder="Email" autocomplete="off">
                 <i class="typcn typcn-eye" id="eye"></i>
                 <input type="password" name="password_user" placeholder="Passsword" id="pwd" autocomplete="off">
+               
                 <label>
                     <input type="checkbox">
                     <span></span>
@@ -31,8 +40,15 @@
                 <a href="{{URL::to('/forgot-password-user')}}" class="forgetpass">Forget Password?</a>
                 <input type="submit" value="Sign in" class="btn1">
             </form>
+           
             <a href="{{ URL::to('/register-user') }}" class="dnthave">Don’t have an account? Sign up</a>
+            <div>
+             
+            </div>
+            
         </div>
+       
+      
 
     </div>
     <script src="{{ asset('public/frontend/assets/js/all.js') }}"></script>

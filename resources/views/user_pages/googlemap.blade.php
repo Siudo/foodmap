@@ -226,53 +226,63 @@
                 }
             });
 
-            // var marker = new google.maps.Marker({
-            //     map: map
-            // });
-            // var inforWindow = new google.maps.InfoWindow();
-            // marker.setVisible(false);
+            // SEARCH LOCATION
+            var marker_search = new google.maps.Marker({
+                map: map
+            });
+            var inforWindow = new google.maps.InfoWindow();
+            marker_search.setVisible(false);
 
-            // var searchBox = document.getElementById("org_input");
-            // var autocomplete = new google.maps.places.Autocomplete(searchBox);
-            // autocomplete.bindTo('bounds', map);
+            var searchBox = document.getElementById("org_input");
+            var autocomplete = new google.maps.places.Autocomplete(searchBox);
+            autocomplete.bindTo('bounds', map);
 
-            // autocomplete.addListener('place_changed', () => {
-            //     inforWindow.close();
-            //     var place = autocomplete.getPlace();
-            //     if (!place.geometry || !place.geometry.location) {
-            //         return;
+            autocomplete.addListener('place_changed', () => {
+                inforWindow.close();
+                var place = autocomplete.getPlace();
+                if (!place.geometry || !place.geometry.location) {
+                    return;
 
-            //     }
-            //     if (place.geometry.viewpoint) {
-            //         map.fitBounds(place.geometry.viewpoint);
+                }
+                if (place.geometry.viewpoint) {
+                    map.fitBounds(place.geometry.viewpoint);
 
-            //     } else {
-            //         map.setCenter(place.geometry.location);
-            //         map.setZoom(15);
-            //     }
-            //     marker.setPlace({
-            //         placeId: place.place_id,
-            //         location: place.geometry.location,
-            //     });
-            //     marker.setVisible(true);
+                } else {
+                    map.setCenter(place.geometry.location);
+                    map.setZoom(15);
+                }
+                marker_search.setPlace({
+                    placeId: place.place_id,
+                    location: place.geometry.location,
+                });
+                marker_search.setVisible(true);
 
-            //     var address = '';
-            //     if (place.address_components) {
-            //         address = [
-            //             (place.address_components[0] && place.address_components[0].short_name || ''),
-            //             (place.address_components[1] && place.address_components[1].short_name || ''),
-            //             (place.address_components[2] && place.address_components[2].short_name || '')
-            //         ].join(' ');
-            //     }
-            //     document.getElementById('lat_res').value = place.geometry.location.lat();
-            //     document.getElementById('lng_res').value = place.geometry.location.lng();
-            //     inforWindow.setContent('<div><strong style="font-weight: bold">' + place.name + '</strong><br>' +
-            //         address);
-            //     inforWindow.open(map, marker);
+                var address = '';
+                if (place.address_components) {
+                    address = [
+                        (place.address_components[0] && place.address_components[0].short_name || ''),
+                        (place.address_components[1] && place.address_components[1].short_name || ''),
+                        (place.address_components[2] && place.address_components[2].short_name || '')
+                    ].join(' ');
+                }
+                document.getElementById('lat_user').value = place.geometry.location.lat();
+                document.getElementById('lng_user').value = place.geometry.location.lng();
+                inforWindow.setContent('<div><strong style="font-weight: bold">' + place.name + '</strong><br>' +
+                    address);
+                inforWindow.open(map, marker);
 
-            // });
+            });
+                
 
-
+            document.getElementById('changemode-walking').addEventListener("click",()=>{
+                document.getElementById('phuongtien').value = 'WALKING';
+            });
+            document.getElementById('changemode-transit').addEventListener("click",()=>{
+                document.getElementById('phuongtien').value = 'TRANSIT';
+            });
+            document.getElementById('changemode-driving').addEventListener("click",()=>{
+                document.getElementById('phuongtien').value = 'DRIVING';
+            });
 
 
 
@@ -295,9 +305,9 @@
 
 
         function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+            var pt = document.getElementById('phuongtien').value;
             directionsService.route({
-                    // origin: location_user,
-                    // destination: location_res,
+                   
                     origin: {
                         lat: parseFloat(document.getElementById('lat_user').value),
                         lng: parseFloat(document.getElementById('lng_user').value),
@@ -306,7 +316,7 @@
                         lat: parseFloat(document.getElementById('lat_res').value),
                         lng: parseFloat(document.getElementById('lng_res').value),
                     },
-                    travelMode: google.maps.TravelMode.DRIVING,
+                    travelMode: google.maps.TravelMode[pt],
                 },
                 (response, status) => {
                     if (status == "OK") {

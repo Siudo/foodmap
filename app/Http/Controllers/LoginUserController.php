@@ -29,6 +29,7 @@ class LoginUserController extends Controller
             return redirect('/');
         }
         else{
+            Session::put('message',"Sai thông tin tài khoản");
             return redirect('/login-user');
         }
         
