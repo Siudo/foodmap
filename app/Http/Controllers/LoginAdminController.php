@@ -118,6 +118,36 @@ class LoginAdminController extends Controller
         return redirect('/login-admin');
     }
 
+    public function index_register_admin()
+    {
+        return view('admin_pages.register_admin');
+    }
+
+    public function save_account_admin(Request $request)
+    {
+        $data = array();
+        $data['tentk_ql'] = $request->tentk_ql;
+        $data['mk'] = md5($request->mk_ql);
+        if(DB::table('taikhoan_quanli')->where('tentk_ql',$data['tentk_ql'])->first()){
+            Session::put('message',"Tên tài khoản đã có người sử dụng");
+            return redirect('/register-admin');
+        }
+        else{
+            DB::table('taikhoan_quanli')->insert($data);
+            $id_tk = DB::getPdo()->lastInsertId();
+
+            $data_admin['id_tkql'] = $id_tk;
+            $data_admin['ten_quanli'] = $request->ten_ql;
+            $data_admin['diachi'] = $request->diachi;
+            $data_admin['sdt'] = $request->sdt;
+            $data_admin['email'] = $request->email;
+            $data_admin['id_tkql'] = $id_tk;
+            DB::table('quanli')->insert($data_admin);
+            return redirect('/login-admin');
+        }
+    }
+
+
     public function logout_admin()
     {
         Session::put('admin_id',null);

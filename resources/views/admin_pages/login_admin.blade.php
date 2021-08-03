@@ -56,7 +56,7 @@
                                         <label for="checkbox1">Remember me</label>
                                     </div>
                                     <div class="float-right">
-                                        <a href="#">Don't have an account?</a>
+                                        <a href="{{URL::to('/register-admin')}}">Don't have an account?</a>
                                     </div>
                                 </div>
                                 <div class="clearfix">

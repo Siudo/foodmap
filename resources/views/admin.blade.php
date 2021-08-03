@@ -40,7 +40,26 @@
                             </a>
 
                         </li>
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i data-feather="briefcase" width="20"></i>
+                                <span>Loại Quán</span>
+                            </a>
 
+                            <ul class="submenu ">
+
+                                <li>
+                                    <a href="{{ URL::to('/them-loai-quan') }}">Thêm loại</a>
+                                </li>
+
+                                <li>
+                                    <a href="{{ URL::to('/tat-ca-loai') }}">Tất cả Loại</a>
+                                </li>
+                                
+
+                            </ul>
+
+                        </li>
 
 
 
@@ -66,26 +85,7 @@
 
 
 
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i data-feather="briefcase" width="20"></i>
-                                <span>Loại Quán</span>
-                            </a>
-
-                            <ul class="submenu ">
-
-                                <li>
-                                    <a href="{{ URL::to('/them-loai-quan') }}">Thêm loại</a>
-                                </li>
-
-                                <li>
-                                    <a href="{{ URL::to('/tat-ca-loai') }}">Tất cả Loại</a>
-                                </li>
-                                
-
-                            </ul>
-
-                        </li>
+                        
 
                         <li class="sidebar-item ">
                             <a href="{{ URL::to('/chitiet-datban') }}" class='sidebar-link'>

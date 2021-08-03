@@ -121,8 +121,8 @@ Route::get('/confirm-code-admin', [LoginAdminController::class , 'confirm_code_a
 Route::post('/check-code-admin', [LoginAdminController::class , 'check_code_admin']);
 Route::get('/change-password-admin', [LoginAdminController::class , 'change_password_admin']);
 Route::post('/update-password-admin', [LoginAdminController::class , 'update_password_admin']);
-
-
+Route::get('/register-admin', [LoginAdminController::class , 'index_register_admin']);
+Route::post('/save-account-admin', [LoginAdminController::class , 'save_account_admin']);
 
 //Ban
 Route::get('/them-ban', [tableController::class , 'index_add_table']);
