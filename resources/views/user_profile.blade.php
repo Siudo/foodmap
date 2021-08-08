@@ -22,7 +22,7 @@
         <div id="sidebar" class='active'>
             <div class="sidebar-wrapper active">
                 <div class="sidebar-header">
-                    <img src="{{ URL::to('public/backend/assets/images/logo/logo.png') }}"
+                    <img src="{{ URL::to('public/backend/assets/images/Logo/logo.png') }}"
                         style="width:100%; height:150px" alt="" srcset="">
                 </div>
                 <div class="sidebar-menu">
@@ -84,7 +84,7 @@
                                 <a class="dropdown-item active" href="#"><i data-feather="mail"></i> Messages</a>
                                 <a class="dropdown-item" href="#"><i data-feather="settings"></i> Settings</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ URL::to('/logout-admin') }}"><i
+                                <a class="dropdown-item" href="{{ URL::to('/logout') }}"><i
                                         data-feather="log-out"></i>
                                     Logout</a>
                             </div>

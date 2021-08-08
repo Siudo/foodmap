@@ -22,7 +22,7 @@
         <div id="sidebar" class='active'>
             <div class="sidebar-wrapper active">
                 <div class="sidebar-header">
-                    <img src="{{ URL::to('public/backend/assets/images/logo/logo.png') }}"
+                    <img src="{{ URL::to('public/backend/assets/images/Logo/logo.png') }}"
                         style="width:100%; height:150px" alt="" srcset="">
                 </div>
                 <div class="sidebar-menu">

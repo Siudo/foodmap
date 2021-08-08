@@ -68,7 +68,7 @@
                     <div class="card-body p-0">
                         <div class="d-flex flex-column">
                             <div class='px-3 py-3 d-flex justify-content-between'>
-                                <h3 class='card-title'>Số người đã ăn tại quán trong tháng</h3>
+                                <h3 class='card-title'>Doanh thu cả năm</h3>
                                 <div class="card-right d-flex align-items-center">
                                     @php
                                     $total_year = 0;

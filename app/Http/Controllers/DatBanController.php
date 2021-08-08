@@ -131,7 +131,7 @@ class DatBanController extends Controller
                         DB::table('datmon')->insert($data_mon);
                     }
 
-
+                    $tenq = DB::table('quan')->where('id_quan',$id_quan)->first()->tenquan;
                    //Gửi mail
 
                    $mail = DB::table('khachhang')->join('taikhoan_kh','taikhoan_kh.id_tkkh','khachhang.id_tkkh')->where('khachhang.id_tkkh',$id_tk)->first()->email;
