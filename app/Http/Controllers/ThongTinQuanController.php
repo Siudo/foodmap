@@ -240,8 +240,8 @@ class ThongTinQuanController extends Controller
     {
         $data = array();
         $data['diachi'] = $request->address_res;
-        $data['vido'] = $request->lat_res;
-        $data['kinhdo'] = $request->lng_res;
+        $data['vido'] = $request->lng_res;
+        $data['kinhdo'] = $request->lat_res;
         $data['id_quan'] = $id_quan;
         DB::table('vitri')->where('id_vitri',$id_vitri)->update($data);
         return redirect('/tat-ca-quan');
