@@ -96,6 +96,23 @@
                             <p id="tgian_mocua" style="text-align: start">0:00</p>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-2" style="text-align: right;padding-right: 8px;">
+                            <i class="fas fa-map-marked-alt"style="color: black;font-size: 25px "></i>
+                           
+                        </div>
+                        <div class="col">
+                            <p id="khoangcach" style="text-align: start">0</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2" style="text-align: right;padding-right: 8px;">
+                            <i class="fas fa-hourglass-half" style="color: black;font-size: 25px "></i>
+                        </div>
+                        <div class="col">
+                            <p id="tgian_chay" style="text-align: start">0</p>
+                        </div>
+                    </div>
                     <div class="mt-10">
                         <input type="hidden" name="lat_res" id="lat_res" class="single-input">
                     </div>
@@ -272,19 +289,54 @@
                 inforWindow.open(map, marker);
 
             });
-                
 
-            document.getElementById('changemode-walking').addEventListener("click",()=>{
+
+
+            document.getElementById('changemode-walking').addEventListener("click", () => {
                 document.getElementById('phuongtien').value = 'WALKING';
             });
-            document.getElementById('changemode-transit').addEventListener("click",()=>{
+            document.getElementById('changemode-transit').addEventListener("click", () => {
                 document.getElementById('phuongtien').value = 'TRANSIT';
             });
-            document.getElementById('changemode-driving').addEventListener("click",()=>{
+            document.getElementById('changemode-driving').addEventListener("click", () => {
                 document.getElementById('phuongtien').value = 'DRIVING';
             });
 
+            // SEARCH LOCATION RES
 
+
+
+            var searchRes = document.getElementById("des_input");
+            var autocomplete2 = new google.maps.places.Autocomplete(searchRes);
+            autocomplete2.bindTo('bounds', map);
+
+            autocomplete2.addListener('place_changed', () => {
+                inforWindow.close();
+                var place = autocomplete2.getPlace();
+                if (!place.geometry || !place.geometry.location) {
+                    return;
+
+                }
+                if (place.geometry.viewpoint) {
+                    map.fitBounds(place.geometry.viewpoint);
+
+                } else {
+                    map.setCenter(place.geometry.location);
+                    map.setZoom(15);
+                }
+
+                var address = '';
+                if (place.address_components) {
+                    address = [
+                        (place.address_components[0] && place.address_components[0].short_name || ''),
+                        (place.address_components[1] && place.address_components[1].short_name || ''),
+                        (place.address_components[2] && place.address_components[2].short_name || '')
+                    ].join(' ');
+                }
+
+
+
+            });
 
 
 
@@ -294,8 +346,38 @@
                 suppressMarkers: true
             });
             directionsRenderer.setMap(map);
+
+
             document.getElementById("btn_chiduong").addEventListener("click", () => {
                 calculateAndDisplayRoute(directionsService, directionsRenderer);
+                const service = new google.maps.DistanceMatrixService();
+                // build request
+                const origin1 = {
+                    lat: parseFloat(document.getElementById('lat_user').value),
+                    lng: parseFloat(document.getElementById('lng_user').value)
+                };
+                const destinationB = {
+                    lat: parseFloat(document.getElementById('lat_res').value),
+                    lng: parseFloat(document.getElementById('lng_res').value)
+                };
+                var pt = document.getElementById('phuongtien').value;
+                const request = {
+                    origins: [origin1],
+                    destinations: [destinationB],
+                    travelMode: google.maps.TravelMode[pt],
+                    unitSystem: google.maps.UnitSystem.METRIC,
+                    avoidHighways: false,
+                    avoidTolls: false,
+                };
+                // put request on page
+
+                // get distance matrix response
+                service.getDistanceMatrix(request).then((response) => {
+                    // put response
+                    document.getElementById("khoangcach").innerHTML = response.rows[0].elements[0].distance.text;
+                    document.getElementById("tgian_chay").innerHTML = response.rows[0].elements[0].duration.text;
+
+                });
 
             });
 
@@ -307,7 +389,7 @@
         function calculateAndDisplayRoute(directionsService, directionsRenderer) {
             var pt = document.getElementById('phuongtien').value;
             directionsService.route({
-                   
+
                     origin: {
                         lat: parseFloat(document.getElementById('lat_user').value),
                         lng: parseFloat(document.getElementById('lng_user').value),
