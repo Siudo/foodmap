@@ -23,7 +23,7 @@ class LoginAdminController extends Controller
     {
         $tentk = $request->admin_name;
         $mk = md5( $request->admin_password);
-        $check_tk = DB::table('taikhoan_quanli')->where('tentk_ql',$tentk)->first();
+        $check_tk = DB::table('taikhoan_quanli')->where('tentk_ql',$tentk)->where('trangthai',0)->first();
         if($check_tk){
             if ($check_tk->mk == $mk) {
                 $data_quanli = DB::table('quanli')->where('id_tkql',$check_tk->id_tkql)->first();

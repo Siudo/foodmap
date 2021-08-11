@@ -15,7 +15,7 @@ class GMapController extends Controller
 {
     public function index()
     {
-        $marker_map = DB::table('vitri')->join('quan','quan.id_quan','vitri.id_quan')->get();
+        $marker_map = DB::table('vitri')->join('quan','quan.id_quan','vitri.id_quan')->where('quan.trangthai',1)->get();
      
        return view('user_pages.googlemap')->with('data_marker',$marker_map);
        

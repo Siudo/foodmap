@@ -21,6 +21,12 @@ use App\Http\Controllers\LoginAdminController;
 |
 */
 
+Route::get('/quantri', [AdminController::class , 'index']);
+Route::get('/login-quantri', [AdminController::class , 'login_quantri']);
+Route::post('/check-login-quantri', [AdminController::class , 'check_login_quantri']);
+Route::get('/logout-quantri', [AdminController::class , 'logout_quantri']);
+Route::get('/xacnhan-tk/{id_tkql}', [AdminController::class , 'xacnhan_tk']);
+
 
 // USER homepage
 Route::get('/', [TrangchuController::class , 'index']);
