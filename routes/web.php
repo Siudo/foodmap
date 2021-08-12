@@ -26,6 +26,7 @@ Route::get('/login-quantri', [AdminController::class , 'login_quantri']);
 Route::post('/check-login-quantri', [AdminController::class , 'check_login_quantri']);
 Route::get('/logout-quantri', [AdminController::class , 'logout_quantri']);
 Route::get('/xacnhan-tk/{id_tkql}', [AdminController::class , 'xacnhan_tk']);
+Route::get('/in4-res-quantri/{id_tkql}', [AdminController::class , 'in4_res_quantri']);
 
 
 // USER homepage

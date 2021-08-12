@@ -26,8 +26,15 @@ class AdminController extends Controller
     public function index()
     {
         $this->AuthLogin();
-        $data_tk = DB::table('taikhoan_quanli')->paginate(10);
+        $data_tk = DB::table('taikhoan_quanli')->orderBy('id_tkql','DESC')->paginate(10);
         return view('quantri.quanlytk')->with('data_tk',$data_tk);
+    }
+
+    public function in4_res_quantri($id_tkql)
+    {
+        $this->AuthLogin();
+        $data_quanli = DB::table('quanli')->where('id_tkql',$id_tkql)->get();
+        return view('quantri.quantritt')->with('data_quanli',$data_quanli);
     }
 
     public function xacnhan_tk($id_tkql)
@@ -52,6 +59,7 @@ class AdminController extends Controller
     {
         return view('quantri.login_quantri');
     }
+
     public function check_login_quantri(Request $request)
     {
         $tentk = $request->taikhoan;

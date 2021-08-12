@@ -4,7 +4,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Thông tin tài khoản</h4>
+                    <h4 class="card-title">Thông tin quán ĐK</h4>
                 </div>
                 <div class="card-content">
                     <div class="card-body">
@@ -14,39 +14,36 @@
                                 <thead class="thead-dark">
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Tên tài khoản</th>
-                                        <th scope="col">Trạng thái</th>
+                                        <th scope="col">Tên quản lí</th>
+                                        <th scope="col">Địa chỉ</th>
+                                        <th scope="col">SĐT</th>
+                                        <th scope="col">Email</th>
                                         <th scope="col">Tuỳ chọn</th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
                                  
-                                    @foreach ($data_tk as $key => $values)
+                                    @foreach ($data_quanli as $key => $values)
                                         <tr>
-                                            <th scope="row">{{ $values->id_tkql }}</th>
-                                            <td>{{ $values->tentk_ql }}</td>                                            
-                                            
-                                            @if ($values->trangthai)
-                                                <td><span class="badge bg-danger">Đã đóng cửa</span></td>
-                                            @else
-                                                <td><span class="badge bg-success">Đang hoạt động</span></td>
-                                            @endif
-
+                                            <th scope="row">{{ $values->id_quanli }}</th>
+                                            <td>{{ $values->ten_quanli }}</td>                                            
+                                            <td>{{ $values->diachi }}</td> 
+                                            <td>{{ $values->sdt }}</td> 
+                                            <td>{{ $values->email }}</td> 
                                             <td>
-                                                <a href="{{ URL::to('/in4-res-quantri/' . $values->id_tkql) }}"><i class="fas fa-info-circle" style="font-size:25px"></i>
-                                               </a>
-                                                <a href="{{ URL::to('/xacnhan-tk/' . $values->id_tkql) }}" onclick="return confirm('Bạn muốn chặn không ?')">
-                                                    <i class="fas fa-user-lock" style="font-size:25px"></i></a>
-
+                                                <a href="{{ URL::to('/quantri') }}">
+                                                    <i class="fas fa-caret-square-left" style="font-size:25px"></i></a>
                                             </td>
+
                                         </tr>
+
                                     @endforeach
 
                                 </tbody>
 
                             </table>
-                            {{ $data_tk->links('pagination.custom_paginate') }}
+                          
                             <?php
                             $message = Session::get('message');
                             if ($message) {
